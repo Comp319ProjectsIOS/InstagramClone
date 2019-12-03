@@ -50,6 +50,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="290-YD-OLf">
                                 <rect key="frame" x="229" y="460" width="123" height="30"/>
                                 <state key="normal" title="Forget Password?"/>
+                                <connections>
+                                    <segue destination="xZY-jc-uT7" kind="show" id="AMe-XA-f71"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1V-bw-K8J">
                                 <rect key="frame" x="181" y="606" width="52" height="30"/>
@@ -84,6 +87,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="138" y="123"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="fDG-HT-L0h">
+            <objects>
+                <viewController id="xZY-jc-uT7" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qiw-Iq-ydU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your email." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nj1-No-rnJ">
+                                <rect key="frame" x="20" y="164" width="183" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CyV-2D-pAx">
+                                <rect key="frame" x="20" y="193" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5N5-EJ-Sdy">
+                                <rect key="frame" x="20" y="235" width="109" height="30"/>
+                                <state key="normal" title="Reset Password"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="VCf-3u-KF9" firstAttribute="trailing" secondItem="CyV-2D-pAx" secondAttribute="trailing" constant="20" id="6Hb-Yb-yfs"/>
+                            <constraint firstItem="CyV-2D-pAx" firstAttribute="top" secondItem="nj1-No-rnJ" secondAttribute="bottom" constant="8" id="86B-as-Rc8"/>
+                            <constraint firstItem="CyV-2D-pAx" firstAttribute="leading" secondItem="VCf-3u-KF9" secondAttribute="leading" constant="20" id="OGc-e1-eye"/>
+                            <constraint firstItem="nj1-No-rnJ" firstAttribute="leading" secondItem="VCf-3u-KF9" secondAttribute="leading" constant="20" id="Vgw-1D-wy3"/>
+                            <constraint firstItem="5N5-EJ-Sdy" firstAttribute="leading" secondItem="VCf-3u-KF9" secondAttribute="leading" constant="20" id="hYa-jf-UNw"/>
+                            <constraint firstItem="5N5-EJ-Sdy" firstAttribute="top" secondItem="CyV-2D-pAx" secondAttribute="bottom" constant="8" id="jNg-55-G3i"/>
+                            <constraint firstItem="nj1-No-rnJ" firstAttribute="top" secondItem="VCf-3u-KF9" secondAttribute="top" constant="76" id="mgN-Dg-wNg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VCf-3u-KF9"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="T3e-cb-SsS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ub5-IG-JT5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1024.6376811594205" y="122.54464285714285"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pxv-fQ-26V">
