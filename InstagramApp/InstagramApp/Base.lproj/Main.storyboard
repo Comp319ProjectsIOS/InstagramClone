@@ -88,10 +88,10 @@
             </objects>
             <point key="canvasLocation" x="138" y="123"/>
         </scene>
-        <!--View Controller-->
+        <!--Forget Password View Controller-->
         <scene sceneID="fDG-HT-L0h">
             <objects>
-                <viewController id="xZY-jc-uT7" sceneMemberID="viewController">
+                <viewController id="xZY-jc-uT7" customClass="ForgetPasswordViewController" customModule="InstagramApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qiw-Iq-ydU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
