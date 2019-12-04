@@ -117,6 +117,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5N5-EJ-Sdy">
                                 <rect key="frame" x="20" y="235" width="109" height="30"/>
                                 <state key="normal" title="Reset Password"/>
+                                <connections>
+                                    <action selector="resetPasswordTapped:" destination="xZY-jc-uT7" eventType="touchUpInside" id="RVJ-El-W8R"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -132,6 +135,9 @@
                         <viewLayoutGuide key="safeArea" id="VCf-3u-KF9"/>
                     </view>
                     <navigationItem key="navigationItem" id="T3e-cb-SsS"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="CyV-2D-pAx" id="gnP-nq-qdL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ub5-IG-JT5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
