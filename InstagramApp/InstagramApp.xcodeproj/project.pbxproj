@@ -16,7 +16,8 @@
 		5FEC60942393E343003BE74A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FEC60932393E343003BE74A /* GoogleService-Info.plist */; };
 		A4A0927A5E2D47E5CC5E2681 /* Pods_InstagramApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5998353612A716D693BB977 /* Pods_InstagramApp.framework */; };
 		D41441542396F1180084FED9 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41441532396F1180084FED9 /* ForgetPasswordViewController.swift */; };
-		D414415723985EE80084FED9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414415623985EE80084FED9 /* Alert.swift */; };
+		D414415723985EE80084FED9 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414415623985EE80084FED9 /* Utilities.swift */; };
+		D414415923986FA20084FED9 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414415823986FA20084FED9 /* PostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +32,8 @@
 		5FEC60912393D7C1003BE74A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5FEC60932393E343003BE74A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D41441532396F1180084FED9 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
-		D414415623985EE80084FED9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		D414415623985EE80084FED9 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		D414415823986FA20084FED9 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		E5998353612A716D693BB977 /* Pods_InstagramApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6E0E792C2EBCFE066DECADB /* Pods-InstagramApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramApp.release.xcconfig"; path = "Target Support Files/Pods-InstagramApp/Pods-InstagramApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,7 +79,7 @@
 		5FEC607B2393D731003BE74A /* InstagramApp */ = {
 			isa = PBXGroup;
 			children = (
-				D414415523985EA30084FED9 /* Functions */,
+				D414415523985EA30084FED9 /* Helpers */,
 				5FEC60902393D7A0003BE74A /* ViewControllers */,
 				5FEC607C2393D731003BE74A /* AppDelegate.swift */,
 				5FEC607E2393D731003BE74A /* SceneDelegate.swift */,
@@ -95,6 +97,7 @@
 			children = (
 				5FEC60912393D7C1003BE74A /* LoginViewController.swift */,
 				D41441532396F1180084FED9 /* ForgetPasswordViewController.swift */,
+				D414415823986FA20084FED9 /* PostViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -108,12 +111,12 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		D414415523985EA30084FED9 /* Functions */ = {
+		D414415523985EA30084FED9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				D414415623985EE80084FED9 /* Alert.swift */,
+				D414415623985EE80084FED9 /* Utilities.swift */,
 			);
-			path = Functions;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,10 +235,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D414415923986FA20084FED9 /* PostViewController.swift in Sources */,
 				5FEC60922393D7C1003BE74A /* LoginViewController.swift in Sources */,
 				5FEC607D2393D731003BE74A /* AppDelegate.swift in Sources */,
 				D41441542396F1180084FED9 /* ForgetPasswordViewController.swift in Sources */,
-				D414415723985EE80084FED9 /* Alert.swift in Sources */,
+				D414415723985EE80084FED9 /* Utilities.swift in Sources */,
 				5FEC607F2393D731003BE74A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

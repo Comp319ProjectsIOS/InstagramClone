@@ -21,19 +21,23 @@ class ForgetPasswordViewController: UIViewController {
     }
     
     @IBAction func resetPasswordTapped(_ sender: Any) {
-        userForgotPassword(emailTextField: emailTextField, vc: self)
+        userForgotPassword()
     }
     
-    public func userForgotPassword(emailTextField: UITextField, vc: UIViewController) {
+    
+    // BU KISIM MVC VIOLATE EDIYOR MU??
+    public func userForgotPassword() {
         if let email = emailTextField.text {
             Auth.auth().sendPasswordReset(withEmail: email) { (error) in
                 if let error = error {
-                    PresentAlert(vc, title: "Error", message: error.localizedDescription)
+                    PresentAlert(self, title: "Error", message: error.localizedDescription)
                 }
-                PresentAlert(vc, title: "A reset password link has been sent to you!", message: "Lütfen \(email) mail adresini kontrol ediniz.")
+                PresentAlert(self, title: "A reset password link has been sent to you!", message: "Please \(email) check your emails.")
             }
         }
     }
+    
+    
     
       /*
     // MARK: - Navigation
