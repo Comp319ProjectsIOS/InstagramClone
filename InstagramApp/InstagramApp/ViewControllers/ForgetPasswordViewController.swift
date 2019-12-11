@@ -10,30 +10,34 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
+extension ForgetPasswordViewController: FirebaseUtilitiesDelegate {
+    func presentAlert(title: String, message: String) {
+        presentAlertHelper(self, title: title, message: message)
+    }
+    
+    
+}
+
 class ForgetPasswordViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     
+    let firebaseUtilities = FirebaseUtilities()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Forget Password"
+        firebaseUtilities.delegate = self
         // Do any additional setup after loading the view.
     }
     
     @IBAction func resetPasswordTapped(_ sender: Any) {
-        userForgotPassword(emailTextField: emailTextField, vc: self)
+        firebaseUtilities.userForgotPassword(email: emailTextField.text)
     }
     
-    public func userForgotPassword(emailTextField: UITextField, vc: UIViewController) {
-        if let email = emailTextField.text {
-            Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-                if let error = error {
-                    PresentAlert(vc, title: "Error", message: error.localizedDescription)
-                }
-                PresentAlert(vc, title: "A reset password link has been sent to you!", message: "Lütfen \(email) mail adresini kontrol ediniz.")
-            }
-        }
-    }
+  
+    
+    
     
       /*
     // MARK: - Navigation
