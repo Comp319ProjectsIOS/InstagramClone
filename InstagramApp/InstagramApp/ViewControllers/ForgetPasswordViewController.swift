@@ -10,32 +10,32 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
+extension ForgetPasswordViewController: FirebaseUtilitiesDelegate {
+    func presentAlert(title: String, message: String) {
+        presentAlertHelper(self, title: title, message: message)
+    }
+    
+    
+}
+
 class ForgetPasswordViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     
+    let firebaseUtilities = FirebaseUtilities()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Forget Password"
+        firebaseUtilities.delegate = self
         // Do any additional setup after loading the view.
     }
     
     @IBAction func resetPasswordTapped(_ sender: Any) {
-        userForgotPassword()
+        firebaseUtilities.userForgotPassword(email: emailTextField.text)
     }
     
-    
-    // BU KISIM MVC VIOLATE EDIYOR MU??
-    public func userForgotPassword() {
-        if let email = emailTextField.text {
-            Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-                if let error = error {
-                    PresentAlert(self, title: "Error", message: error.localizedDescription)
-                }
-                PresentAlert(self, title: "A reset password link has been sent to you!", message: "Please \(email) check your emails.")
-            }
-        }
-    }
+  
     
     
     

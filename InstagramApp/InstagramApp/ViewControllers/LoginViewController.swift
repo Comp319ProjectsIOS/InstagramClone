@@ -10,35 +10,31 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
+extension LoginViewController: FirebaseUtilitiesDelegate {
+    func presentAlert(title: String, message: String) {
+        presentAlertHelper(self, title: title, message: message)
+    }
+}
+
 class LoginViewController: UIViewController {
     @IBOutlet weak var emailText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
     
+    let firebaseUtilities = FirebaseUtilities()
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Login"
+        firebaseUtilities.delegate = self
         // Do any additional setup after loading the view.
     }
     
     @IBAction func loginTapped(_ sender: Any) {
-        login()
+        firebaseUtilities.login(email: emailText.text, password: passwordText.text)
     }
     
     
   // Bu kısım mvc violate mi ediyor???
-    func login() {
-        if let email = emailText.text {
-            if let password = passwordText.text {
-                Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-                    if let error = error {
-                        PresentAlert(self, title: "Error", message: error.localizedDescription)
-                    } else {
-                        print("You are sign in.")
-                    }
-                }
-            }
-        }
-    }
+   
     
     /*
     // MARK: - Navigation

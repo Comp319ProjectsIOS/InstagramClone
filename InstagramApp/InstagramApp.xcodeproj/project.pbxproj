@@ -18,6 +18,7 @@
 		D41441542396F1180084FED9 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41441532396F1180084FED9 /* ForgetPasswordViewController.swift */; };
 		D414415723985EE80084FED9 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414415623985EE80084FED9 /* Utilities.swift */; };
 		D414415923986FA20084FED9 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414415823986FA20084FED9 /* PostViewController.swift */; };
+		D414415B239923B50084FED9 /* FirebaseUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414415A239923B50084FED9 /* FirebaseUtilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		D41441532396F1180084FED9 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		D414415623985EE80084FED9 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		D414415823986FA20084FED9 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		D414415A239923B50084FED9 /* FirebaseUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtilities.swift; sourceTree = "<group>"; };
 		E5998353612A716D693BB977 /* Pods_InstagramApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6E0E792C2EBCFE066DECADB /* Pods-InstagramApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramApp.release.xcconfig"; path = "Target Support Files/Pods-InstagramApp/Pods-InstagramApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +116,7 @@
 		D414415523985EA30084FED9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D414415A239923B50084FED9 /* FirebaseUtilities.swift */,
 				D414415623985EE80084FED9 /* Utilities.swift */,
 			);
 			path = Helpers;
@@ -241,6 +244,7 @@
 				D41441542396F1180084FED9 /* ForgetPasswordViewController.swift in Sources */,
 				D414415723985EE80084FED9 /* Utilities.swift in Sources */,
 				5FEC607F2393D731003BE74A /* SceneDelegate.swift in Sources */,
+				D414415B239923B50084FED9 /* FirebaseUtilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

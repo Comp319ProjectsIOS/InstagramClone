@@ -9,14 +9,20 @@
 import UIKit
 
 class PostViewController: UIViewController {
-
+    @IBOutlet weak var postDescriptionLabel: UITextField!
+    @IBOutlet weak var postImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Post"
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func postTapped(_ sender: Any) {
+    }
+    
+    @IBAction func selectImageTapped(_ sender: Any) {
+    }
     /*
     // MARK: - Navigation
 
