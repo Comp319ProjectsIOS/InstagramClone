@@ -249,6 +249,64 @@
             </objects>
             <point key="canvasLocation" x="1024.6376811594205" y="122.54464285714285"/>
         </scene>
+        <!--Post View Controller-->
+        <scene sceneID="QD4-TJ-e7n">
+            <objects>
+                <viewController id="Y1E-Ru-QYu" customClass="PostViewController" customModule="InstagramApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="anr-Qh-q2d">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Please describe your post in a few words..." borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SbU-wQ-acW">
+                                <rect key="frame" x="20" y="129" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wsl-We-d70">
+                                <rect key="frame" x="107" y="213" width="200" height="200"/>
+                                <color key="backgroundColor" red="0.84671173950635026" green="0.88080204922918215" blue="0.8588885966806401" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Wsl-We-d70" secondAttribute="height" multiplier="1:1" id="4AQ-5S-bWg"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCd-Ir-c3W">
+                                <rect key="frame" x="192" y="832" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Post"/>
+                                <connections>
+                                    <action selector="postTapped:" destination="Y1E-Ru-QYu" eventType="touchUpInside" id="1Hq-1L-4yn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEU-Ry-73i">
+                                <rect key="frame" x="150" y="325" width="115" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Select Image"/>
+                                <connections>
+                                    <action selector="selectImageTapped:" destination="Y1E-Ru-QYu" eventType="touchUpInside" id="sFX-ho-Iu6"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Wsl-We-d70" firstAttribute="top" secondItem="SbU-wQ-acW" secondAttribute="bottom" constant="50" id="9ML-ch-a77"/>
+                            <constraint firstItem="SbU-wQ-acW" firstAttribute="top" secondItem="Vmp-up-ftF" secondAttribute="top" constant="85" id="Cnr-NV-KbY"/>
+                            <constraint firstItem="SbU-wQ-acW" firstAttribute="leading" secondItem="Vmp-up-ftF" secondAttribute="leading" constant="20" id="PBE-Cb-bVb"/>
+                            <constraint firstItem="Vmp-up-ftF" firstAttribute="trailing" secondItem="SbU-wQ-acW" secondAttribute="trailing" constant="20" id="woB-aO-Fzt"/>
+                            <constraint firstItem="Vmp-up-ftF" firstAttribute="trailing" secondItem="Wsl-We-d70" secondAttribute="trailing" constant="107" id="ypY-7B-Vn4"/>
+                            <constraint firstItem="Wsl-We-d70" firstAttribute="leading" secondItem="Vmp-up-ftF" secondAttribute="leading" constant="107" id="zYD-fb-Luv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Vmp-up-ftF"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9KB-ZV-f8a"/>
+                    <connections>
+                        <outlet property="postDescriptionLabel" destination="SbU-wQ-acW" id="prd-pF-wOv"/>
+                        <outlet property="postImageView" destination="Wsl-We-d70" id="Hc0-sc-tyP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BSE-hA-xrC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1024.6376811594205" y="1325.8928571428571"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pxv-fQ-26V">
             <objects>
@@ -258,7 +316,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="HWx-r5-n2p"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="EEj-HT-hHJ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fnh-Sj-Czk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
