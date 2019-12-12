@@ -7,13 +7,14 @@
 //
 
 import UIKit
-import Firebase
+
+
 
 extension SignUpViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.editedImage] as! UIImage? {
-            profileImageView.contentMode = .scaleAspectFit
             profileImageView.image = image
+            self.image = image
         }
         dismiss(animated: true, completion: nil)
     }
@@ -23,6 +24,16 @@ extension SignUpViewController: UINavigationControllerDelegate {
     
 }
 
+extension SignUpViewController: FirebaseUtilitiesDelegate {
+    func presentAlert(title: String, message: String) {
+        presentAlertHelper(self, title: title, message: message)
+    }
+    func dismissPage() {
+         if let firstViewController = self.navigationController?.viewControllers.first {
+               self.navigationController?.popToViewController(firstViewController, animated: true)
+           } 
+    }
+}
 class SignUpViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -30,14 +41,26 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     
     let picker = UIImagePickerController()
+    var image: UIImage?
+    let firebaseUtilities = FirebaseUtilities()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
+        firebaseUtilities.delegate = self
         // Do any additional setup after loading the view.
     }
     
     @IBAction func signUpTapped(_ sender: Any) {
+        guard let email = emailTextField.text, let password = passwordTextField.text, let username = userNameTextField.text else {
+           return presentAlertHelper(self, title: "Error", message: "Please, fill in all required fields")
+        }
+        if let image = image {
+            let data = image.jpegData(compressionQuality: 0.5)
+            firebaseUtilities.signUp(email: email, password: password, data: data, username: username)
+        }
+        
+        
     }
     
     @IBAction func selectImageTapped(_ sender: Any) {
