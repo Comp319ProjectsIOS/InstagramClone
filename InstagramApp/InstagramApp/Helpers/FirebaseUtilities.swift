@@ -39,25 +39,26 @@ class FirebaseUtilities {
                 if let error = error {
                     self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                     return
+                }else {
+                    self.delegate?.presentAlert(title: "A reset password link has been sent to you!", message: "Please \(email) check your emails.")
                 }
-                self.delegate?.presentAlert(title: "A reset password link has been sent to you!", message: "Please \(email) check your emails.")
             }
         }
     }
     
     func login(email: String?, password: String?) {
-           if let email = email {
-               if let password = password {
-                   Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-                       if let error = error {
+        if let email = email {
+            if let password = password {
+                Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+                    if let error = error {
                         self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                       } else {
-                           print("You are sign in.")
-                       }
-                   }
-               }
-           }
-       }
+                    } else {
+                        print("You are sign in.")
+                    }
+                }
+            }
+        }
+    }
     
     func signUp(email: String?, password: String?, data: Data?, username: String){
         if let email = email {
