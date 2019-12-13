@@ -56,7 +56,7 @@ class PostViewController: UIViewController {
         }
         if let image = image {
             let data = image.jpegData(compressionQuality: 0.5)
-            firebaseUtilities.postImage(data: data)
+            firebaseUtilities.postImage(description: postDescription ,data: data)
         }
     }
     
@@ -65,6 +65,11 @@ class PostViewController: UIViewController {
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     /*
     // MARK: - Navigation
 

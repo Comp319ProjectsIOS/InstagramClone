@@ -14,12 +14,15 @@ import FirebaseFirestore
 protocol FirebaseUtilitiesDelegate {
     func presentAlert(title: String, message: String)
     func dismissPage()
+    func loginSuccess()
 }
 
 extension FirebaseUtilitiesDelegate {
     func presentAlert(title: String, message: String) {
     }
     func dismissPage(){
+    }
+    func loginSuccess(){
     }
 }
 
@@ -54,6 +57,7 @@ class FirebaseUtilities {
                         self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                     } else {
                         print("You are sign in.")
+                        self.delegate?.loginSuccess()
                     }
                 }
             }
@@ -103,11 +107,41 @@ class FirebaseUtilities {
         }
     }
     
-    func postImage (data: Data?) {
+    func postImage (description: String, data: Data?) {
         let uid = Auth.auth().currentUser!.uid
         let dataRef = Firestore.firestore().collection("posts")
         
         let timeStamp = NSDate.timeIntervalSinceReferenceDate
         let imageRef = storageRef.child("posts").child(uid).child("\(timeStamp).jpg")
+        
+        let uploadTask = imageRef.putData(data!, metadata: nil) { (metaData, error) in
+            if let error = error {
+                self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                return
+            }
+            imageRef.downloadURL { (url, error) in
+                 if let error = error {
+                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                               return
+                }
+                if let url = url {
+                    let postInfo: [String: Any] = ["description": description,
+                                                   "urlToPostImage": url.absoluteString]
+                    dataRef.document(uid).collection("postObjects").document(String(timeStamp)).setData(postInfo) { (error) in
+                        if let error = error {
+                                self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                                return
+                            }
+                            UserDefaults.standard.set(uid, forKey: "uid")
+                        print("I have posted wohoo")
+                            self.delegate?.dismissPage()
+                        }
+                }
+            }
+        }
+    }
+    
+    func uploadImage(data: Data){
+        
     }
 }

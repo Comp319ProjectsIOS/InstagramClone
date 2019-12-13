@@ -34,7 +34,11 @@ class ForgetPasswordViewController: UIViewController {
     @IBAction func resetPasswordTapped(_ sender: Any) {
         firebaseUtilities.userForgotPassword(email: emailTextField.text)
     }
+
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
   
     
     
