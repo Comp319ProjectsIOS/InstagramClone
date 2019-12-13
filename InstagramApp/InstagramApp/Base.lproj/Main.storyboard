@@ -257,41 +257,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Please describe your post in a few words..." borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SbU-wQ-acW">
-                                <rect key="frame" x="20" y="129" width="374" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wsl-We-d70">
-                                <rect key="frame" x="107" y="213" width="200" height="200"/>
+                                <rect key="frame" x="107" y="102" width="200" height="200"/>
                                 <color key="backgroundColor" red="0.84671173950635026" green="0.88080204922918215" blue="0.8588885966806401" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Wsl-We-d70" secondAttribute="height" multiplier="1:1" id="4AQ-5S-bWg"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCd-Ir-c3W">
-                                <rect key="frame" x="192" y="832" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCd-Ir-c3W">
+                                <rect key="frame" x="191.5" y="832" width="31" height="30"/>
                                 <state key="normal" title="Post"/>
                                 <connections>
                                     <action selector="postTapped:" destination="Y1E-Ru-QYu" eventType="touchUpInside" id="1Hq-1L-4yn"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEU-Ry-73i">
-                                <rect key="frame" x="150" y="325" width="115" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEU-Ry-73i">
+                                <rect key="frame" x="162.5" y="365" width="89" height="30"/>
                                 <state key="normal" title="Select Image"/>
                                 <connections>
                                     <action selector="selectImageTapped:" destination="Y1E-Ru-QYu" eventType="touchUpInside" id="sFX-ho-Iu6"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" text="Please describe your post in a few words..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AOc-RR-9LJ">
+                                <rect key="frame" x="20" y="433" width="374" height="344"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Wsl-We-d70" firstAttribute="top" secondItem="SbU-wQ-acW" secondAttribute="bottom" constant="50" id="9ML-ch-a77"/>
-                            <constraint firstItem="SbU-wQ-acW" firstAttribute="top" secondItem="Vmp-up-ftF" secondAttribute="top" constant="85" id="Cnr-NV-KbY"/>
-                            <constraint firstItem="SbU-wQ-acW" firstAttribute="leading" secondItem="Vmp-up-ftF" secondAttribute="leading" constant="20" id="PBE-Cb-bVb"/>
-                            <constraint firstItem="Vmp-up-ftF" firstAttribute="trailing" secondItem="SbU-wQ-acW" secondAttribute="trailing" constant="20" id="woB-aO-Fzt"/>
+                            <constraint firstItem="pEU-Ry-73i" firstAttribute="centerX" secondItem="Wsl-We-d70" secondAttribute="centerX" id="7gy-ld-NQo"/>
+                            <constraint firstItem="Wsl-We-d70" firstAttribute="top" secondItem="Vmp-up-ftF" secondAttribute="top" constant="58" id="LPa-z7-iqw"/>
+                            <constraint firstItem="AOc-RR-9LJ" firstAttribute="leading" secondItem="Vmp-up-ftF" secondAttribute="leading" constant="20" id="O4F-fV-j4s"/>
+                            <constraint firstItem="PCd-Ir-c3W" firstAttribute="top" secondItem="AOc-RR-9LJ" secondAttribute="bottom" constant="55" id="eWy-dj-rOQ"/>
+                            <constraint firstItem="Vmp-up-ftF" firstAttribute="trailing" secondItem="AOc-RR-9LJ" secondAttribute="trailing" constant="20" id="mgA-QD-EYm"/>
+                            <constraint firstItem="PCd-Ir-c3W" firstAttribute="centerX" secondItem="Vmp-up-ftF" secondAttribute="centerX" id="uQf-I5-eIm"/>
+                            <constraint firstItem="Vmp-up-ftF" firstAttribute="bottom" secondItem="PCd-Ir-c3W" secondAttribute="bottom" id="vcj-5i-4oK"/>
+                            <constraint firstItem="AOc-RR-9LJ" firstAttribute="top" secondItem="pEU-Ry-73i" secondAttribute="bottom" constant="38" id="yOc-rh-j6L"/>
+                            <constraint firstItem="pEU-Ry-73i" firstAttribute="top" secondItem="Wsl-We-d70" secondAttribute="bottom" constant="63" id="yoF-F3-Fm2"/>
                             <constraint firstItem="Vmp-up-ftF" firstAttribute="trailing" secondItem="Wsl-We-d70" secondAttribute="trailing" constant="107" id="ypY-7B-Vn4"/>
                             <constraint firstItem="Wsl-We-d70" firstAttribute="leading" secondItem="Vmp-up-ftF" secondAttribute="leading" constant="107" id="zYD-fb-Luv"/>
                         </constraints>
@@ -299,13 +304,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="9KB-ZV-f8a"/>
                     <connections>
-                        <outlet property="postDescriptionLabel" destination="SbU-wQ-acW" id="prd-pF-wOv"/>
+                        <outlet property="postDescriptionLabel" destination="AOc-RR-9LJ" id="dpb-Js-P1b"/>
                         <outlet property="postImageView" destination="Wsl-We-d70" id="Hc0-sc-tyP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BSE-hA-xrC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="1340"/>
+            <point key="canvasLocation" x="137.68115942028987" y="1339.9553571428571"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pxv-fQ-26V">

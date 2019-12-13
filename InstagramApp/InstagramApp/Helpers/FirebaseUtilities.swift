@@ -30,7 +30,7 @@ class FirebaseUtilities {
     
     
     init() {
-        storageRef = storage.reference()
+        storageRef = storage.reference(forURL: "gs://instagramclone-b86bf.appspot.com")
     }
     
     func userForgotPassword(email: String?) {
@@ -101,5 +101,13 @@ class FirebaseUtilities {
                 }
             }
         }
+    }
+    
+    func postImage (data: Data?) {
+        let uid = Auth.auth().currentUser!.uid
+        let dataRef = Firestore.firestore().collection("posts")
+        
+        let timeStamp = NSDate.timeIntervalSinceReferenceDate
+        let imageRef = storageRef.child("posts").child(uid).child("\(timeStamp).jpg")
     }
 }
