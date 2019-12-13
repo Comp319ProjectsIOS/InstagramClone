@@ -40,7 +40,7 @@ class FirebaseUtilities {
                     self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                     return
                 }else {
-                    self.delegate?.presentAlert(title: "A reset password link has been sent to you!", message: "Please \(email) check your emails.")
+                    self.delegate?.presentAlert(title: "A reset password link has been sent to you!", message: "Please check your emails.")
                 }
             }
         }
