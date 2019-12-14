@@ -72,7 +72,7 @@ class FirebaseUtilities {
                         self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                     } else {
                         if let user = user {
-                            let imageRef = self.storageRef.child("\(user.user.uid).jpg")
+                            let imageRef = self.storageRef.child("profileImages").child("\(user.user.uid).jpg")
                             if let imageData = data {
                                 let uploadTask = imageRef.putData(imageData, metadata: nil) { (metaData, error) in
                                     if let error = error {
@@ -88,7 +88,7 @@ class FirebaseUtilities {
                                             let userInfo: [String: Any] = ["uid": user.user.uid,
                                                                            "userName": username,
                                                                            "urlToImage": url.absoluteString]
-                                            let dataRef = Firestore.firestore().collection("users").document().setData(userInfo) { (error) in
+                                            let dataRef = Firestore.firestore().collection("users").document(user.user.uid).setData(userInfo) { (error) in
                                                 if let error = error {
                                                     self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                                                     return

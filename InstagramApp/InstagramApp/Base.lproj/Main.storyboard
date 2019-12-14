@@ -244,10 +244,10 @@
             </objects>
             <point key="canvasLocation" x="-2061" y="2167"/>
         </scene>
-        <!--View Controller-->
+        <!--Feed View Controller-->
         <scene sceneID="7de-VZ-ALf">
             <objects>
-                <viewController id="zHm-2k-nFw" sceneMemberID="viewController">
+                <viewController id="zHm-2k-nFw" customClass="FeedViewController" customModule="InstagramApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZSX-RQ-R17">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -367,7 +367,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVH-TZ-AAl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="2167"/>
+            <point key="canvasLocation" x="2330" y="2167"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="QD4-TJ-e7n">
@@ -430,15 +430,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BSE-hA-xrC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="3086"/>
-        </scene>
-        <!--Storyboard Reference-->
-        <scene sceneID="msK-sU-m85">
-            <objects>
-                <viewControllerPlaceholder id="DUm-Ia-KTg" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rz4-GW-TeT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2028" y="3234"/>
+            <point key="canvasLocation" x="2329" y="3072"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pxv-fQ-26V">
