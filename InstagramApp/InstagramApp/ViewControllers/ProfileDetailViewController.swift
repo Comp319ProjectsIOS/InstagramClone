@@ -40,7 +40,7 @@ class ProfileDetailViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var postsCollectionView: UICollectionView!
     var selectedUser: User?
-    let firebaseUtilities = FirebaseUtilities()
+    let firebaseUtilities = FirebaseUtilities.getInstance()
     var postArray: [Post] = []
     
     override func viewDidLoad() {

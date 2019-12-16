@@ -41,7 +41,7 @@ extension FeedViewController: UITableViewDataSource {
 
 class FeedViewController: UIViewController {
     @IBOutlet weak var feedTableView: UITableView!
-    let firebaseUtilities = FirebaseUtilities()
+    let firebaseUtilities = FirebaseUtilities.getInstance()
     var postArray: [Post] = []
     
     override func viewDidLoad() {

@@ -40,7 +40,7 @@ class PostViewController: UIViewController {
     
     let picker = UIImagePickerController()
     var image: UIImage?
-    let firebaseUtilities = FirebaseUtilities()
+    let firebaseUtilities = FirebaseUtilities.getInstance()
     
     override func viewDidLoad() {
         super.viewDidLoad()

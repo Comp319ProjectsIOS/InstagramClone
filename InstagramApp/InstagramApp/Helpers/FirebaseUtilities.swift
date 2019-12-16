@@ -43,9 +43,14 @@ class FirebaseUtilities {
     var userDict = [String : Any]()
     var userArray = [User]()
     var postArray = [Post]()
+    static let firebaseUtilities = FirebaseUtilities()
     
-    init() {
+    private init() {
         storageRef = storage.reference(forURL: "gs://instagramclone-b86bf.appspot.com")
+    }
+    
+    static func getInstance() -> FirebaseUtilities {
+        return firebaseUtilities
     }
     
     func userForgotPassword(email: String?) {
@@ -171,7 +176,7 @@ class FirebaseUtilities {
                 for document in querySnapshot!.documents {
                     let userData = document.data()
                     var userObject = User()
-                   self.userDict.updateValue(document.data(), forKey: document.documentID)
+                    self.userDict.updateValue(document.data(), forKey: document.documentID)
                     //adding user to user array
                     if let username = userData["userName"] as? String, let urlToImage = userData["urlToImage"] as? String, let uid = userData["uid"] as? String {
                         userObject.imageRef = urlToImage
