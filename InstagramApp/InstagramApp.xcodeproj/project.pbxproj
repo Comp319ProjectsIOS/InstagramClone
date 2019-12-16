@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F4C2D1923A8250300DC7F87 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4C2D1823A8250300DC7F87 /* ProfileDetailViewController.swift */; };
+		5F4C2D1B23A829DB00DC7F87 /* ProfileDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4C2D1A23A829DB00DC7F87 /* ProfileDetailCollectionViewCell.swift */; };
 		5F5F462723A182970021714B /* UserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F462623A182970021714B /* UserDataSource.swift */; };
 		5F81464A23A77DA200CAF14B /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F81464923A77DA200CAF14B /* FeedTableViewCell.swift */; };
 		5FABA7F723986206000C2EC7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FABA7F623986206000C2EC7 /* SignUpViewController.swift */; };
@@ -31,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		2DD4DD3A4921DAE8BEC038C8 /* Pods-InstagramApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramApp.debug.xcconfig"; path = "Target Support Files/Pods-InstagramApp/Pods-InstagramApp.debug.xcconfig"; sourceTree = "<group>"; };
+		5F4C2D1823A8250300DC7F87 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
+		5F4C2D1A23A829DB00DC7F87 /* ProfileDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		5F5F462623A182970021714B /* UserDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataSource.swift; sourceTree = "<group>"; };
 		5F81464923A77DA200CAF14B /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		5FABA7F623986206000C2EC7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				5F81464923A77DA200CAF14B /* FeedTableViewCell.swift */,
+				5F4C2D1A23A829DB00DC7F87 /* ProfileDetailCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 				D414415823986FA20084FED9 /* PostViewController.swift */,
 				D4EFE9CF23A4ABEC0055C839 /* PostDetailViewController.swift */,
 				D4EB918A23A505720037DDC0 /* FeedViewController.swift */,
+				5F4C2D1823A8250300DC7F87 /* ProfileDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -287,12 +293,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D414415923986FA20084FED9 /* PostViewController.swift in Sources */,
+				5F4C2D1923A8250300DC7F87 /* ProfileDetailViewController.swift in Sources */,
 				5FEC60922393D7C1003BE74A /* LoginViewController.swift in Sources */,
 				5FEC607D2393D731003BE74A /* AppDelegate.swift in Sources */,
 				D41441542396F1180084FED9 /* ForgetPasswordViewController.swift in Sources */,
 				D4EFE9D023A4ABEC0055C839 /* PostDetailViewController.swift in Sources */,
 				D4EFE9D223A4AC440055C839 /* Post.swift in Sources */,
 				D414415723985EE80084FED9 /* Utilities.swift in Sources */,
+				5F4C2D1B23A829DB00DC7F87 /* ProfileDetailCollectionViewCell.swift in Sources */,
 				D4EB918B23A505720037DDC0 /* FeedViewController.swift in Sources */,
 				5F5F462723A182970021714B /* UserDataSource.swift in Sources */,
 				5F81464A23A77DA200CAF14B /* FeedTableViewCell.swift in Sources */,

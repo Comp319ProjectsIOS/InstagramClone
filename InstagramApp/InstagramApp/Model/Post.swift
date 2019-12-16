@@ -13,4 +13,5 @@ struct Post {
     var urlToPostImage: String?
     var username: String?
     var postId: String?
+    var uid: String?
 }

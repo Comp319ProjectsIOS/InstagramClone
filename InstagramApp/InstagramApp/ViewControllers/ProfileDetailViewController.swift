@@ -1,0 +1,69 @@
+//
+//  ProfileDetailViewController.swift
+//  InstagramApp
+//
+//  Created by Başak Çörtük on 16.12.2019.
+//  Copyright © 2019 BasakMelih. All rights reserved.
+//
+
+import UIKit
+
+extension ProfileDetailViewController: FirebaseUtilitiesDelegate {
+    func postsForProfileFetched(postList: [Post]) {
+        postArray = postList
+        postsCollectionView.reloadData()
+    }
+}
+
+extension ProfileDetailViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return postArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let item = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! ProfileDetailCollectionViewCell
+        let index = indexPath.row
+        let post = postArray[index]
+        item.postImageView.downloadImage(from: URL(string: post.urlToPostImage!)!)
+        return item
+    }
+    
+    
+}
+
+
+class ProfileDetailViewController: UIViewController {
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var postsCollectionView: UICollectionView!
+    var selectedUser: User?
+    let firebaseUtilities = FirebaseUtilities()
+    var postArray: [Post] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        firebaseUtilities.delegate = self
+        if let user = selectedUser {
+            usernameLabel.text = user.userName
+            profileImageView.downloadImage(from: URL(string: user.imageRef!)!)
+        }
+        // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func addFriendTapped(_ sender: Any) {
+    }
+    
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

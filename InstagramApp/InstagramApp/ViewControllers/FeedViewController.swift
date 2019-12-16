@@ -68,7 +68,6 @@ class FeedViewController: UIViewController {
         if let indexPath = indexPath {
             let post = postArray[indexPath.row]
             let destination = segue.destination as! PostDetailViewController
-            
             destination.selectedPost = post
         }
     }

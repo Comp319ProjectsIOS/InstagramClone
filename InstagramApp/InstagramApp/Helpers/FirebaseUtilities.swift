@@ -17,7 +17,7 @@ protocol FirebaseUtilitiesDelegate {
     func loginSuccess()
     func postDataFetched(postList: [Post])
     func userDataFetched(userList: [User])
-    
+    func postsForProfileFetched(postList: [Post])
 }
 
 extension FirebaseUtilitiesDelegate {
@@ -30,6 +30,8 @@ extension FirebaseUtilitiesDelegate {
     func postDataFetched(postList: [Post]) {
     }
     func userDataFetched(userList: [User]) {
+    }
+    func postsForProfileFetched(postList: [Post]){
     }
 }
 
@@ -169,7 +171,7 @@ class FirebaseUtilities {
                 for document in querySnapshot!.documents {
                     let userData = document.data()
                     var userObject = User()
-//                    self.userDict.updateValue(document.data(), forKey: document.documentID)
+                   self.userDict.updateValue(document.data(), forKey: document.documentID)
                     //adding user to user array
                     if let username = userData["userName"] as? String, let urlToImage = userData["urlToImage"] as? String, let uid = userData["uid"] as? String {
                         userObject.imageRef = urlToImage
@@ -201,11 +203,37 @@ class FirebaseUtilities {
                         postObject.postId = postId
                         postObject.urlToPostImage = urlToPostImage
                         postObject.username = username
+                        postObject.uid = uid
                         self.postArray.append(postObject)
                     }                                    
                 }
             }
             self.delegate?.postDataFetched(postList: self.postArray)
+        }
+    }
+    
+    func fetchPostsForProfile(uid: String){
+        var postsArray: [Post] = []
+        let dataRef = Firestore.firestore()
+        dataRef.collection("posts").document(uid).collection("postObjects").getDocuments() {(querySnapshot, err) in
+            if let err = err {
+                self.delegate?.presentAlert(title: "Error", message: err.localizedDescription)
+                return
+            } else {
+                for post in querySnapshot!.documents {
+                    let postData = post.data()
+                    var postObject = Post()
+                    if let description = postData["description"] as? String, let urlToPostImage = postData["urlToPostImage"] as? String, let username = postData["username"] as? String, let postId = postData["postId"] as? String {
+                        postObject.description = description
+                        postObject.postId = postId
+                        postObject.urlToPostImage = urlToPostImage
+                        postObject.username = username
+                        postObject.uid = uid
+                        postsArray.append(postObject)
+                    }
+                }
+            }
+            self.delegate?.postsForProfileFetched(postList: postsArray)
         }
     }
 }
