@@ -28,9 +28,9 @@ extension PostViewController: FirebaseUtilitiesDelegate {
         presentAlertHelper(self, title: title, message: message)
     }
     func dismissPage() {
-         if let firstViewController = self.navigationController?.viewControllers.first {
-               self.navigationController?.popToViewController(firstViewController, animated: true)
-           }
+//        if let vc = self.storyboard?.instantiateViewController(identifier: "feedVC") {
+//            self.reloadInputViews()
+//           }
     }
 }
 

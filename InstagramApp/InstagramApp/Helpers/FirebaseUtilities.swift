@@ -120,28 +120,24 @@ class FirebaseUtilities {
                 return
             }
             imageRef.downloadURL { (url, error) in
-                 if let error = error {
+                if let error = error {
                     self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                               return
+                    return
                 }
                 if let url = url {
                     let postInfo: [String: Any] = ["description": description,
                                                    "urlToPostImage": url.absoluteString]
                     dataRef.document(uid).collection("postObjects").document(String(timeStamp)).setData(postInfo) { (error) in
                         if let error = error {
-                                self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                                return
-                            }
-                            UserDefaults.standard.set(uid, forKey: "uid")
-                        print("I have posted wohoo")
-                            self.delegate?.dismissPage()
+                            self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                            return
                         }
+                        UserDefaults.standard.set(uid, forKey: "uid")
+                        print("I have posted wohoo")
+                        self.delegate?.dismissPage()
+                    }
                 }
             }
         }
-    }
-    
-    func uploadImage(data: Data){
-        
     }
 }

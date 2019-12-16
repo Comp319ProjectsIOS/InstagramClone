@@ -14,3 +14,7 @@ public func presentAlertHelper(_ viewController: UIViewController, title: String
       alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
       viewController.present(alert, animated: true, completion: nil)
   }
+
+public func showViewController() {
+    
+}
