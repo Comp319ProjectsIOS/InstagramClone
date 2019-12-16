@@ -22,10 +22,8 @@ class PostDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         if let post = selectedPost {
-/* change these in order to have the right image and description for the query
-            postImage.image = UIImage(named: post.imageRef)
-            postDescriptionLabel.text = post.postDescription
- */
+            postImage.downloadImage(from: URL(string: post.urlToPostImage!)!)
+            postDescriptionLabel.text = post.description
         }
     }
 

@@ -9,7 +9,10 @@
 import UIKit
 
 extension FeedViewController: FirebaseUtilitiesDelegate {
-    
+    func postDataFetched(postList: [Post]) {
+        self.postArray = postList
+        self.feedTableView.reloadData()
+    }
 }
 
 extension FeedViewController: UITableViewDataSource {
@@ -23,11 +26,10 @@ extension FeedViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! FeedTableViewCell
-        let index = indexPath.row.quotientAndRemainder(dividingBy: 5).remainder
-        let player = postArray[indexPath.row]
-//        cell.postImageView.image
-//        cell.usernameLabel.text
-  //      cell.descriptionLabel.text
+        let post = postArray[indexPath.row]
+        cell.postImageView.downloadImage(from: URL(string: post.urlToPostImage!)!)
+        cell.usernameLabel.text = post.username
+        cell.descriptionLabel.text = post.description
         
         return cell
     }
@@ -40,23 +42,31 @@ extension FeedViewController: UITableViewDataSource {
 class FeedViewController: UIViewController {
     @IBOutlet weak var feedTableView: UITableView!
     let firebaseUtilities = FirebaseUtilities()
-    let postArray: [Post] = []
+    var postArray: [Post] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         firebaseUtilities.delegate = self
         firebaseUtilities.fetchUsers()
+        title = "Feed"
         // Do any additional setup after loading the view.
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        let cell = sender as! FeedTableViewCell
+        let indexPath = feedTableView.indexPath(for: cell)
+        if let indexPath = indexPath {
+            let post = postArray[indexPath.row]
+            let destination = segue.destination as! PostDetailViewController
+            
+            destination.selectedPost = post
+        }
     }
-    */
-
 }

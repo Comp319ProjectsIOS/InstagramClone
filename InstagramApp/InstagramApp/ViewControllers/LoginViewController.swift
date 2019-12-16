@@ -15,8 +15,7 @@ extension LoginViewController: FirebaseUtilitiesDelegate {
         presentAlertHelper(self, title: title, message: message)
     }
     func loginSuccess() {
-        let vc = self.storyboard?.instantiateViewController(identifier: "postVC")
-        self.show(vc!, sender: nil)
+        performSegue(withIdentifier: "loginSuccess", sender: nil)
     }
 }
 

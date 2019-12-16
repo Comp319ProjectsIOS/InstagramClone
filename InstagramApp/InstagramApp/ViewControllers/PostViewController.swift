@@ -44,9 +44,9 @@ class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Post"
         picker.delegate = self
         firebaseUtilities.delegate = self
+        title = "Post"
         // Do any additional setup after loading the view.
     }
     

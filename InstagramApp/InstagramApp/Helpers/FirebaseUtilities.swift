@@ -15,14 +15,21 @@ protocol FirebaseUtilitiesDelegate {
     func presentAlert(title: String, message: String)
     func dismissPage()
     func loginSuccess()
+    func postDataFetched(postList: [Post])
+    func userDataFetched(userList: [User])
+    
 }
 
 extension FirebaseUtilitiesDelegate {
     func presentAlert(title: String, message: String) {
     }
-    func dismissPage(){
+    func dismissPage() {
     }
-    func loginSuccess(){
+    func loginSuccess() {
+    }
+    func postDataFetched(postList: [Post]) {
+    }
+    func userDataFetched(userList: [User]) {
     }
 }
 
@@ -32,6 +39,7 @@ class FirebaseUtilities {
     var storageRef: StorageReference
     var postDict = [String : Any]()
     var userDict = [String : Any]()
+    var userArray = [User]()
     var postArray = [Post]()
     
     init() {
@@ -131,7 +139,7 @@ class FirebaseUtilities {
                     if let url = url {
                         let postInfo: [String: Any] = ["description": description,
                                                        "urlToPostImage": url.absoluteString,
-                                                       "username": Auth.auth().currentUser?.displayName,
+                                                       "username": Auth.auth().currentUser?.displayName!,
                                                        "postId": String(timeStamp)]
                         dataRef.document(uid).collection("postObjects").document(String(timeStamp)).setData(postInfo) { (error) in
                             if let error = error {
@@ -154,11 +162,21 @@ class FirebaseUtilities {
                 self.delegate?.presentAlert(title: "Error", message: err.localizedDescription)
                 return
             } else {
-                 for document in querySnapshot!.documents {
+                for document in querySnapshot!.documents {
+                    let userData = document.data()
+                    var userObject = User()
                     self.userDict.updateValue(document.data(), forKey: document.documentID)
+                    if let username = userData["userName"] as? String, let urlToImage = userData["urlToImage"] as? String, let uid = userData["uid"] as? String {
+                        userObject.imageRef = urlToImage
+                        userObject.uid = uid
+                        userObject.userName = username
+                        self.userArray.append(userObject)
+                    }
                     self.fetchPosts(uid: document.documentID)
                 }
             }
+            
+            self.delegate?.userDataFetched(userList: self.userArray)
         }
     }
     
@@ -169,14 +187,20 @@ class FirebaseUtilities {
                 self.delegate?.presentAlert(title: "Error", message: err.localizedDescription)
                 return
             } else {
-                 for post in querySnapshot!.documents {
-                    self.postDict.updateValue(post.data(), forKey: "\(uid)-\(post.documentID)")
-                    let postObject = Post()
-                    if let description = 
-                    self.postArray.append(post.data())
-                     print("\(self.postDict)")
+                for post in querySnapshot!.documents {
+                    let postData = post.data()
+                    var postObject = Post()
+                    self.postDict.updateValue(postData, forKey: "\(uid)-\(post.documentID)")
+                    if let description = postData["description"] as? String, let urlToPostImage = postData["urlToPostImage"] as? String, let username = postData["username"] as? String, let postId = postData["postId"] as? String {
+                        postObject.description = description
+                        postObject.postId = postId
+                        postObject.urlToPostImage = urlToPostImage
+                        postObject.username = username
+                        self.postArray.append(postObject)
+                    }                                    
                 }
             }
+            self.delegate?.postDataFetched(postList: self.postArray)
         }
     }
 }
