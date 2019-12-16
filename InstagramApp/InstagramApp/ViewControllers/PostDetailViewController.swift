@@ -11,6 +11,7 @@ import UIKit
 class PostDetailViewController: UIViewController {
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var postDescriptionLabel: UILabel!
+    @IBOutlet weak var usernameButton: UIButton!
     
     var selectedPost: Post?
     
@@ -24,6 +25,7 @@ class PostDetailViewController: UIViewController {
         if let post = selectedPost {
             postImage.downloadImage(from: URL(string: post.urlToPostImage!)!)
             postDescriptionLabel.text = post.description
+            usernameButton.setTitle(post.username, for: .normal)
         }
     }
 

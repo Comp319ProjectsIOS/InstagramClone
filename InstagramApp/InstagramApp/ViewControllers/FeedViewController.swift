@@ -52,9 +52,9 @@ class FeedViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func refreshTapped(_ sender: Any) {
-        firebaseUtilities.fetchUsers()
-    }
+//    @IBAction func refreshTapped(_ sender: Any) {
+//        firebaseUtilities.fetchUsers()
+//    }
     
     
     // MARK: - Navigation
