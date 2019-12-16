@@ -15,7 +15,9 @@ extension LoginViewController: FirebaseUtilitiesDelegate {
         presentAlertHelper(self, title: title, message: message)
     }
     func loginSuccess() {
-        performSegue(withIdentifier: "loginSuccess", sender: nil)
+        let vc = self.storyboard?.instantiateViewController(identifier: "postVC")
+        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.pushViewController(vc!, animated: true)
     }
 }
 
@@ -38,9 +40,7 @@ class LoginViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-  // Bu kısım mvc violate mi ediyor???
-   
+       
     
     /*
     // MARK: - Navigation

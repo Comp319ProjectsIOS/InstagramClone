@@ -30,7 +30,6 @@
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mpm-gv-0PN"/>
-                                    <segue destination="NkV-cj-ntS" kind="presentation" identifier="loginSuccess" modalPresentationStyle="fullScreen" id="SBs-Br-A7e"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asktagram" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6l-Qb-Gi1">
@@ -243,7 +242,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-2061" y="2167"/>
+            <point key="canvasLocation" x="-361" y="1831"/>
         </scene>
         <!--Feed View Controller-->
         <scene sceneID="7de-VZ-ALf">
@@ -303,6 +302,7 @@
                                             <outlet property="descriptionLabel" destination="K6v-sX-v4K" id="tAe-Io-kHY"/>
                                             <outlet property="postImageView" destination="LaT-cG-RfM" id="ifa-zs-Xu6"/>
                                             <outlet property="usernameLabel" destination="2xZ-lL-HI3" id="ecq-Ws-cBi"/>
+                                            <segue destination="IuC-YD-HBR" kind="show" id="M6d-q0-61C"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -321,14 +321,24 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iGr-6E-tJe"/>
                     </view>
-                    <navigationItem key="navigationItem" id="4rx-uc-c3z"/>
+                    <navigationItem key="navigationItem" id="4rx-uc-c3z">
+                        <barButtonItem key="rightBarButtonItem" image="arrow.clockwise" catalog="system" style="plain" id="Ny7-eq-fsf">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sps-nN-3s7">
+                                <rect key="frame" x="302" y="7" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="refreshTapped:" destination="zHm-2k-nFw" eventType="touchUpInside" id="AtS-BK-gyp"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="feedTableView" destination="RK4-hH-Nds" id="P28-40-Ufk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pg0-gi-4uE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2062.3188405797105" y="3085.7142857142858"/>
+            <point key="canvasLocation" x="-362" y="2544"/>
         </scene>
         <!--Post Detail View Controller-->
         <scene sceneID="9DS-a8-ca1">
@@ -339,27 +349,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DYR-gB-bKw">
-                                <rect key="frame" x="66" y="116" width="282" height="280"/>
+                                <rect key="frame" x="66" y="160" width="282" height="280"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="DYR-gB-bKw" secondAttribute="height" multiplier="15:8" constant="-243" id="uSh-6p-kM8"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odH-cX-VMe">
-                                <rect key="frame" x="20" y="438" width="374" height="81.5"/>
+                                <rect key="frame" x="20" y="482" width="374" height="81.5"/>
                                 <string key="text">Post DescriptionPost DescriptionPost DescriptionPost DescriptionPost DescriptionPost DescriptionPost DescriptionPost DescriptionPost DescriptionPost Description</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9S-EY-Cie">
-                                <rect key="frame" x="273" y="527.5" width="75" height="30"/>
+                                <rect key="frame" x="273" y="571.5" width="75" height="30"/>
                                 <state key="normal" title="Comments"/>
                                 <connections>
                                     <segue destination="7TE-XV-GjN" kind="show" id="IJn-lF-Rbc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxf-bs-Scj">
-                                <rect key="frame" x="66" y="527.5" width="99" height="30"/>
+                                <rect key="frame" x="66" y="571.5" width="99" height="30"/>
                                 <state key="normal" title="Add Comment"/>
                                 <connections>
                                     <segue destination="NbP-6g-cXd" kind="show" id="YZM-lv-OlQ"/>
@@ -381,6 +391,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hih-qv-fKE"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Fh6-vL-96G"/>
                     <connections>
                         <outlet property="postDescriptionLabel" destination="odH-cX-VMe" id="eH0-cC-VBU"/>
                         <outlet property="postImage" destination="DYR-gB-bKw" id="tH7-UW-GwH"/>
@@ -388,14 +399,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="278-c6-Km9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1470" y="4246"/>
+            <point key="canvasLocation" x="233" y="3332"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="wcD-tB-PoC">
             <objects>
                 <viewController id="NbP-6g-cXd" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tz8-a8-LCq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Jj6-aF-dBf"/>
@@ -404,14 +415,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rz1-ks-hPY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="3996"/>
+            <point key="canvasLocation" x="-542" y="4068"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="dk7-c7-uyN">
             <objects>
                 <viewController id="7TE-XV-GjN" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vo6-al-dNN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="D2e-T0-Ocz"/>
@@ -420,7 +431,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oOm-St-Mb4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="4791"/>
+            <point key="canvasLocation" x="232" y="4082"/>
         </scene>
         <!--Item-->
         <scene sceneID="z0b-mA-0cV">
@@ -437,7 +448,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="2330" y="2167"/>
+            <point key="canvasLocation" x="800" y="1847"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="QD4-TJ-e7n">
@@ -500,7 +511,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BSE-hA-xrC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2329" y="3072"/>
+            <point key="canvasLocation" x="800" y="2544"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pxv-fQ-26V">
@@ -519,4 +530,7 @@
             <point key="canvasLocation" x="-722" y="123"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
+    </resources>
 </document>

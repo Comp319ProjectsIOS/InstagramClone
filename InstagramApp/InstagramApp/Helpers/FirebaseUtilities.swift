@@ -156,6 +156,10 @@ class FirebaseUtilities {
     }
     
     func fetchUsers() {
+        postDict = [String : Any]()
+        userDict = [String : Any]()
+        userArray = []
+        postArray = []
         let dataRef = Firestore.firestore()
         dataRef.collection("users").getDocuments() {(querySnapshot, err) in
             if let err = err {
@@ -165,7 +169,8 @@ class FirebaseUtilities {
                 for document in querySnapshot!.documents {
                     let userData = document.data()
                     var userObject = User()
-                    self.userDict.updateValue(document.data(), forKey: document.documentID)
+//                    self.userDict.updateValue(document.data(), forKey: document.documentID)
+                    //adding user to user array
                     if let username = userData["userName"] as? String, let urlToImage = userData["urlToImage"] as? String, let uid = userData["uid"] as? String {
                         userObject.imageRef = urlToImage
                         userObject.uid = uid
@@ -175,7 +180,6 @@ class FirebaseUtilities {
                     self.fetchPosts(uid: document.documentID)
                 }
             }
-            
             self.delegate?.userDataFetched(userList: self.userArray)
         }
     }
@@ -190,7 +194,8 @@ class FirebaseUtilities {
                 for post in querySnapshot!.documents {
                     let postData = post.data()
                     var postObject = Post()
-                    self.postDict.updateValue(postData, forKey: "\(uid)-\(post.documentID)")
+//                    self.postDict.updateValue(postData, forKey: "\(uid)-\(post.documentID)")
+                    //adding the post object to the post array...
                     if let description = postData["description"] as? String, let urlToPostImage = postData["urlToPostImage"] as? String, let username = postData["username"] as? String, let postId = postData["postId"] as? String {
                         postObject.description = description
                         postObject.postId = postId
