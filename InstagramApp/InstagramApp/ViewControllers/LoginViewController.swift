@@ -16,8 +16,7 @@ extension LoginViewController: FirebaseUtilitiesDelegate {
     }
     func loginSuccess() {
         let vc = self.storyboard?.instantiateViewController(identifier: "postVC")
-        self.navigationController?.popViewController(animated: true)
-        self.navigationController?.pushViewController(vc!, animated: true)
+        self.navigationController?.viewControllers = [vc!]
     }
 }
 

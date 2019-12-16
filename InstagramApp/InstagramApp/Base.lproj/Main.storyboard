@@ -219,8 +219,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="S9w-J4-EeT" kind="relationship" relationship="viewControllers" id="puX-Ru-LCS"/>
-                        <segue destination="MDL-ML-NOi" kind="relationship" relationship="viewControllers" id="hPl-pX-HRG"/>
+                        <segue destination="zHm-2k-nFw" kind="relationship" relationship="viewControllers" id="EVk-tY-DN4"/>
+                        <segue destination="Y1E-Ru-QYu" kind="relationship" relationship="viewControllers" id="IV7-et-1Ej"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l77-Is-Ygg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -228,23 +228,6 @@
             <point key="canvasLocation" x="138" y="1085"/>
         </scene>
         <!--Item-->
-        <scene sceneID="BKl-C5-zYK">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="i10-Yg-Vx5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="feedVC" id="MDL-ML-NOi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="eSI-K8-UON"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OPz-va-E2l">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="zHm-2k-nFw" kind="relationship" relationship="rootViewController" id="SGq-xx-i7o"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="-361" y="1831"/>
-        </scene>
-        <!--Feed View Controller-->
         <scene sceneID="7de-VZ-ALf">
             <objects>
                 <viewController id="zHm-2k-nFw" customClass="FeedViewController" customModule="InstagramApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -253,7 +236,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RK4-hH-Nds">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="postCell" rowHeight="270" id="vut-Y5-UzU" customClass="FeedTableViewCell" customModule="InstagramApp" customModuleProvider="target">
@@ -321,6 +304,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iGr-6E-tJe"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Ib7-AN-3Zy"/>
                     <navigationItem key="navigationItem" id="4rx-uc-c3z">
                         <barButtonItem key="rightBarButtonItem" image="arrow.clockwise" catalog="system" style="plain" id="Ny7-eq-fsf">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sps-nN-3s7">
@@ -338,38 +322,38 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pg0-gi-4uE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-362" y="2544"/>
+            <point key="canvasLocation" x="-416" y="1807"/>
         </scene>
         <!--Post Detail View Controller-->
         <scene sceneID="9DS-a8-ca1">
             <objects>
                 <viewController id="IuC-YD-HBR" customClass="PostDetailViewController" customModule="InstagramApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zKG-uo-E8Q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DYR-gB-bKw">
-                                <rect key="frame" x="66" y="160" width="282" height="280"/>
+                                <rect key="frame" x="66" y="72" width="282" height="280"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="DYR-gB-bKw" secondAttribute="height" multiplier="15:8" constant="-243" id="uSh-6p-kM8"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odH-cX-VMe">
-                                <rect key="frame" x="20" y="482" width="374" height="81.5"/>
+                                <rect key="frame" x="20" y="394" width="374" height="81.5"/>
                                 <string key="text">Post DescriptionPost DescriptionPost DescriptionPost DescriptionPost DescriptionPost DescriptionPost DescriptionPost DescriptionPost DescriptionPost Description</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9S-EY-Cie">
-                                <rect key="frame" x="273" y="571.5" width="75" height="30"/>
+                                <rect key="frame" x="273" y="483.5" width="75" height="30"/>
                                 <state key="normal" title="Comments"/>
                                 <connections>
                                     <segue destination="7TE-XV-GjN" kind="show" id="IJn-lF-Rbc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxf-bs-Scj">
-                                <rect key="frame" x="66" y="571.5" width="99" height="30"/>
+                                <rect key="frame" x="66" y="483.5" width="99" height="30"/>
                                 <state key="normal" title="Add Comment"/>
                                 <connections>
                                     <segue destination="NbP-6g-cXd" kind="show" id="YZM-lv-OlQ"/>
@@ -399,14 +383,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="278-c6-Km9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="233" y="3332"/>
+            <point key="canvasLocation" x="-417" y="2560"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="wcD-tB-PoC">
             <objects>
                 <viewController id="NbP-6g-cXd" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tz8-a8-LCq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Jj6-aF-dBf"/>
@@ -422,7 +406,7 @@
             <objects>
                 <viewController id="7TE-XV-GjN" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vo6-al-dNN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="D2e-T0-Ocz"/>
@@ -434,23 +418,6 @@
             <point key="canvasLocation" x="232" y="4082"/>
         </scene>
         <!--Item-->
-        <scene sceneID="z0b-mA-0cV">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rVH-TZ-AAl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <navigationController id="S9w-J4-EeT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="0Dx-P5-JXq"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DOp-jz-FeT">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Y1E-Ru-QYu" kind="relationship" relationship="rootViewController" id="42H-Pp-sRU"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="800" y="1847"/>
-        </scene>
-        <!--Post View Controller-->
         <scene sceneID="QD4-TJ-e7n">
             <objects>
                 <viewController id="Y1E-Ru-QYu" customClass="PostViewController" customModule="InstagramApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -459,7 +426,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wsl-We-d70">
-                                <rect key="frame" x="75" y="118" width="264" height="264"/>
+                                <rect key="frame" x="75" y="74" width="264" height="264"/>
                                 <color key="backgroundColor" red="0.84671173950635026" green="0.88080204922918215" blue="0.8588885966806401" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Wsl-We-d70" secondAttribute="height" multiplier="1:1" id="4AQ-5S-bWg"/>
@@ -473,14 +440,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEU-Ry-73i">
-                                <rect key="frame" x="162.5" y="412" width="89" height="30"/>
+                                <rect key="frame" x="162.5" y="368" width="89" height="30"/>
                                 <state key="normal" title="Select Image"/>
                                 <connections>
                                     <action selector="selectImageTapped:" destination="Y1E-Ru-QYu" eventType="touchUpInside" id="sFX-ho-Iu6"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" text="Please describe your post in a few words..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AOc-RR-9LJ">
-                                <rect key="frame" x="20" y="480" width="374" height="248"/>
+                                <rect key="frame" x="20" y="436" width="374" height="292"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -503,6 +470,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vmp-up-ftF"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="FhO-8m-F3E"/>
                     <navigationItem key="navigationItem" id="9KB-ZV-f8a"/>
                     <connections>
                         <outlet property="postDescriptionLabel" destination="AOc-RR-9LJ" id="dpb-Js-P1b"/>
@@ -511,12 +479,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BSE-hA-xrC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="800" y="2544"/>
+            <point key="canvasLocation" x="800" y="1807"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pxv-fQ-26V">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fnh-Sj-Czk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="4zB-dZ-G7V" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qaw-nF-O8q">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -526,6 +493,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="EEj-HT-hHJ"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fnh-Sj-Czk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-722" y="123"/>
         </scene>
