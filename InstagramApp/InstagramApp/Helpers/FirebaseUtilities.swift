@@ -208,4 +208,36 @@ class FirebaseUtilities {
             self.delegate?.postDataFetched(postList: self.postArray)
         }
     }
+    
+    func fetchComments(postId: String) {
+        let dataRef = Firestore.firestore()
+        dataRef.collection("comments").document(postId).collection("commentObjects").getDocuments { (querySnapshot, err) in
+            if let err = err {
+                self.delegate?.presentAlert(title: "Error", message: err.localizedDescription)
+                return
+            } else {
+                for comment in querySnapshot!.documents {
+                    let commentData = comment.data()
+                    var commentObject = Comment()
+                }
+            }
+        }
+    }
+    
+    func addComment(postId: String, comment: String) {
+        let uid = Auth.auth().currentUser!.uid
+        let username = Auth.auth().currentUser!.displayName
+        let dataRef = Firestore.firestore().collection("comments").document(postId).collection("commentObjects").document()
+        let commentInfo: [String: Any] = ["username": username,
+                                       "comment": comment,
+                                       "uid": uid]
+        dataRef.setData(commentInfo) { (error) in
+            if let error = error {
+                self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                return
+            }
+            print("I have posted a comment wohoo")
+            self.delegate?.dismissPage()
+        }
+    }
 }
