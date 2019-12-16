@@ -9,6 +9,8 @@
 import Foundation
 
 struct Post {
-    var imageRef: String
-    var postDescription: String
+    var description: String?
+    var urlToPostImage: String?
+    var username: String?
+    var postId: String?
 }

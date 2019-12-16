@@ -30,7 +30,9 @@ class FirebaseUtilities {
     var delegate: FirebaseUtilitiesDelegate?
     let storage = Storage.storage()
     var storageRef: StorageReference
-    
+    var postDict = [String : Any]()
+    var userDict = [String : Any]()
+    var postArray = [Post]()
     
     init() {
         storageRef = storage.reference(forURL: "gs://instagramclone-b86bf.appspot.com")
@@ -72,6 +74,9 @@ class FirebaseUtilities {
                         self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                     } else {
                         if let user = user {
+                            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                            changeRequest?.displayName = username
+                            changeRequest?.commitChanges(completion: nil)
                             let imageRef = self.storageRef.child("profileImages").child("\(user.user.uid).jpg")
                             if let imageData = data {
                                 let uploadTask = imageRef.putData(imageData, metadata: nil) { (metaData, error) in
@@ -110,32 +115,66 @@ class FirebaseUtilities {
     func postImage (description: String, data: Data?) {
         let uid = Auth.auth().currentUser!.uid
         let dataRef = Firestore.firestore().collection("posts")
-        
         let timeStamp = NSDate.timeIntervalSinceReferenceDate
         let imageRef = storageRef.child("posts").child(uid).child("\(timeStamp).jpg")
-        
-        let uploadTask = imageRef.putData(data!, metadata: nil) { (metaData, error) in
-            if let error = error {
-                self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                return
-            }
-            imageRef.downloadURL { (url, error) in
+        if let imageData = data {
+            let uploadTask = imageRef.putData(data!, metadata: nil) { (metaData, error) in
                 if let error = error {
                     self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                     return
                 }
-                if let url = url {
-                    let postInfo: [String: Any] = ["description": description,
-                                                   "urlToPostImage": url.absoluteString]
-                    dataRef.document(uid).collection("postObjects").document(String(timeStamp)).setData(postInfo) { (error) in
-                        if let error = error {
-                            self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                            return
-                        }
-                        UserDefaults.standard.set(uid, forKey: "uid")
-                        print("I have posted wohoo")
-                        self.delegate?.dismissPage()
+                imageRef.downloadURL { (url, error) in
+                    if let error = error {
+                        self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                        return
                     }
+                    if let url = url {
+                        let postInfo: [String: Any] = ["description": description,
+                                                       "urlToPostImage": url.absoluteString,
+                                                       "username": Auth.auth().currentUser?.displayName,
+                                                       "postId": String(timeStamp)]
+                        dataRef.document(uid).collection("postObjects").document(String(timeStamp)).setData(postInfo) { (error) in
+                            if let error = error {
+                                self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                                return
+                            }
+                            print("I have posted wohoo")
+                            self.delegate?.dismissPage()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchUsers() {
+        let dataRef = Firestore.firestore()
+        dataRef.collection("users").getDocuments() {(querySnapshot, err) in
+            if let err = err {
+                self.delegate?.presentAlert(title: "Error", message: err.localizedDescription)
+                return
+            } else {
+                 for document in querySnapshot!.documents {
+                    self.userDict.updateValue(document.data(), forKey: document.documentID)
+                    self.fetchPosts(uid: document.documentID)
+                }
+            }
+        }
+    }
+    
+    func fetchPosts(uid: String) {
+        let dataRef = Firestore.firestore()
+        dataRef.collection("posts").document(uid).collection("postObjects").getDocuments() {(querySnapshot, err) in
+            if let err = err {
+                self.delegate?.presentAlert(title: "Error", message: err.localizedDescription)
+                return
+            } else {
+                 for post in querySnapshot!.documents {
+                    self.postDict.updateValue(post.data(), forKey: "\(uid)-\(post.documentID)")
+                    let postObject = Post()
+                    if let description = 
+                    self.postArray.append(post.data())
+                     print("\(self.postDict)")
                 }
             }
         }

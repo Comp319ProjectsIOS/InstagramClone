@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5F5F462723A182970021714B /* UserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F462623A182970021714B /* UserDataSource.swift */; };
+		5F81464A23A77DA200CAF14B /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F81464923A77DA200CAF14B /* FeedTableViewCell.swift */; };
 		5FABA7F723986206000C2EC7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FABA7F623986206000C2EC7 /* SignUpViewController.swift */; };
 		5FABA7FA239873CC000C2EC7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FABA7F9239873CC000C2EC7 /* User.swift */; };
 		5FEC607D2393D731003BE74A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FEC607C2393D731003BE74A /* AppDelegate.swift */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		2DD4DD3A4921DAE8BEC038C8 /* Pods-InstagramApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramApp.debug.xcconfig"; path = "Target Support Files/Pods-InstagramApp/Pods-InstagramApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5F5F462623A182970021714B /* UserDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataSource.swift; sourceTree = "<group>"; };
+		5F81464923A77DA200CAF14B /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		5FABA7F623986206000C2EC7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		5FABA7F9239873CC000C2EC7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5FEC60792393D731003BE74A /* InstagramApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +74,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5F81464823A77D8800CAF14B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5F81464923A77DA200CAF14B /* FeedTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		5FABA7F8239873B8000C2EC7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +113,7 @@
 		5FEC607B2393D731003BE74A /* InstagramApp */ = {
 			isa = PBXGroup;
 			children = (
+				5F81464823A77D8800CAF14B /* Cells */,
 				5FABA7F8239873B8000C2EC7 /* Model */,
 				D414415523985EA30084FED9 /* Helpers */,
 				5FEC60902393D7A0003BE74A /* ViewControllers */,
@@ -273,6 +284,7 @@
 				D414415723985EE80084FED9 /* Utilities.swift in Sources */,
 				D4EB918B23A505720037DDC0 /* FeedViewController.swift in Sources */,
 				5F5F462723A182970021714B /* UserDataSource.swift in Sources */,
+				5F81464A23A77DA200CAF14B /* FeedTableViewCell.swift in Sources */,
 				5FABA7F723986206000C2EC7 /* SignUpViewController.swift in Sources */,
 				5FEC607F2393D731003BE74A /* SceneDelegate.swift in Sources */,
 				5FABA7FA239873CC000C2EC7 /* User.swift in Sources */,
