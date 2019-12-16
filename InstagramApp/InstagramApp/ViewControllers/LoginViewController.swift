@@ -14,6 +14,10 @@ extension LoginViewController: FirebaseUtilitiesDelegate {
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
     }
+    func loginSuccess() {
+        let vc = self.storyboard?.instantiateViewController(identifier: "postVC")
+        self.navigationController?.viewControllers = [vc!]
+    }
 }
 
 class LoginViewController: UIViewController {
@@ -32,9 +36,10 @@ class LoginViewController: UIViewController {
         firebaseUtilities.login(email: emailText.text, password: passwordText.text)
     }
     
-    
-  // Bu kısım mvc violate mi ediyor???
-   
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+       
     
     /*
     // MARK: - Navigation

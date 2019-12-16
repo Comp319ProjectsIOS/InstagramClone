@@ -14,12 +14,22 @@ import FirebaseFirestore
 protocol FirebaseUtilitiesDelegate {
     func presentAlert(title: String, message: String)
     func dismissPage()
+    func loginSuccess()
+    func postDataFetched(postList: [Post])
+    func userDataFetched(userList: [User])
+    
 }
 
 extension FirebaseUtilitiesDelegate {
     func presentAlert(title: String, message: String) {
     }
-    func dismissPage(){
+    func dismissPage() {
+    }
+    func loginSuccess() {
+    }
+    func postDataFetched(postList: [Post]) {
+    }
+    func userDataFetched(userList: [User]) {
     }
 }
 
@@ -27,10 +37,13 @@ class FirebaseUtilities {
     var delegate: FirebaseUtilitiesDelegate?
     let storage = Storage.storage()
     var storageRef: StorageReference
-    
+    var postDict = [String : Any]()
+    var userDict = [String : Any]()
+    var userArray = [User]()
+    var postArray = [Post]()
     
     init() {
-        storageRef = storage.reference()
+        storageRef = storage.reference(forURL: "gs://instagramclone-b86bf.appspot.com")
     }
     
     func userForgotPassword(email: String?) {
@@ -54,6 +67,7 @@ class FirebaseUtilities {
                         self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                     } else {
                         print("You are sign in.")
+                        self.delegate?.loginSuccess()
                     }
                 }
             }
@@ -68,7 +82,10 @@ class FirebaseUtilities {
                         self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                     } else {
                         if let user = user {
-                            let imageRef = self.storageRef.child("\(user.user.uid).jpg")
+                            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                            changeRequest?.displayName = username
+                            changeRequest?.commitChanges(completion: nil)
+                            let imageRef = self.storageRef.child("profileImages").child("\(user.user.uid).jpg")
                             if let imageData = data {
                                 let uploadTask = imageRef.putData(imageData, metadata: nil) { (metaData, error) in
                                     if let error = error {
@@ -84,7 +101,7 @@ class FirebaseUtilities {
                                             let userInfo: [String: Any] = ["uid": user.user.uid,
                                                                            "userName": username,
                                                                            "urlToImage": url.absoluteString]
-                                            let dataRef = Firestore.firestore().collection("users").document().setData(userInfo) { (error) in
+                                            let dataRef = Firestore.firestore().collection("users").document(user.user.uid).setData(userInfo) { (error) in
                                                 if let error = error {
                                                     self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                                                     return
@@ -100,6 +117,95 @@ class FirebaseUtilities {
                     }
                 }
             }
+        }
+    }
+    
+    func postImage (description: String, data: Data?) {
+        let uid = Auth.auth().currentUser!.uid
+        let dataRef = Firestore.firestore().collection("posts")
+        let timeStamp = NSDate.timeIntervalSinceReferenceDate
+        let imageRef = storageRef.child("posts").child(uid).child("\(timeStamp).jpg")
+        if let imageData = data {
+            let uploadTask = imageRef.putData(data!, metadata: nil) { (metaData, error) in
+                if let error = error {
+                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                    return
+                }
+                imageRef.downloadURL { (url, error) in
+                    if let error = error {
+                        self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                        return
+                    }
+                    if let url = url {
+                        let postInfo: [String: Any] = ["description": description,
+                                                       "urlToPostImage": url.absoluteString,
+                                                       "username": Auth.auth().currentUser?.displayName!,
+                                                       "postId": String(timeStamp)]
+                        dataRef.document(uid).collection("postObjects").document(String(timeStamp)).setData(postInfo) { (error) in
+                            if let error = error {
+                                self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                                return
+                            }
+                            print("I have posted wohoo")
+                            self.delegate?.dismissPage()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchUsers() {
+        postDict = [String : Any]()
+        userDict = [String : Any]()
+        userArray = []
+        postArray = []
+        let dataRef = Firestore.firestore()
+        dataRef.collection("users").getDocuments() {(querySnapshot, err) in
+            if let err = err {
+                self.delegate?.presentAlert(title: "Error", message: err.localizedDescription)
+                return
+            } else {
+                for document in querySnapshot!.documents {
+                    let userData = document.data()
+                    var userObject = User()
+//                    self.userDict.updateValue(document.data(), forKey: document.documentID)
+                    //adding user to user array
+                    if let username = userData["userName"] as? String, let urlToImage = userData["urlToImage"] as? String, let uid = userData["uid"] as? String {
+                        userObject.imageRef = urlToImage
+                        userObject.uid = uid
+                        userObject.userName = username
+                        self.userArray.append(userObject)
+                    }
+                    self.fetchPosts(uid: document.documentID)
+                }
+            }
+            self.delegate?.userDataFetched(userList: self.userArray)
+        }
+    }
+    
+    func fetchPosts(uid: String) {
+        let dataRef = Firestore.firestore()
+        dataRef.collection("posts").document(uid).collection("postObjects").getDocuments() {(querySnapshot, err) in
+            if let err = err {
+                self.delegate?.presentAlert(title: "Error", message: err.localizedDescription)
+                return
+            } else {
+                for post in querySnapshot!.documents {
+                    let postData = post.data()
+                    var postObject = Post()
+//                    self.postDict.updateValue(postData, forKey: "\(uid)-\(post.documentID)")
+                    //adding the post object to the post array...
+                    if let description = postData["description"] as? String, let urlToPostImage = postData["urlToPostImage"] as? String, let username = postData["username"] as? String, let postId = postData["postId"] as? String {
+                        postObject.description = description
+                        postObject.postId = postId
+                        postObject.urlToPostImage = urlToPostImage
+                        postObject.username = username
+                        self.postArray.append(postObject)
+                    }                                    
+                }
+            }
+            self.delegate?.postDataFetched(postList: self.postArray)
         }
     }
 }

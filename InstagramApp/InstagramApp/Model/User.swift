@@ -9,7 +9,7 @@
 import Foundation
 
 struct User {
-    var userName: String
-    var email: String
-    var imageRef: String
+    var userName: String?
+    var uid: String?
+    var imageRef: String?
 }

@@ -46,6 +46,7 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Sign Up"
         picker.delegate = self
         firebaseUtilities.delegate = self
         // Do any additional setup after loading the view.
@@ -67,6 +68,10 @@ class SignUpViewController: UIViewController {
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     /*
