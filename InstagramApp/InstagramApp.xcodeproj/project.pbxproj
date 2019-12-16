@@ -29,6 +29,9 @@
 		D4EB918B23A505720037DDC0 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EB918A23A505720037DDC0 /* FeedViewController.swift */; };
 		D4EFE9D023A4ABEC0055C839 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EFE9CF23A4ABEC0055C839 /* PostDetailViewController.swift */; };
 		D4EFE9D223A4AC440055C839 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EFE9D123A4AC440055C839 /* Post.swift */; };
+		D4F4F24923A828C500524EC1 /* AddCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4F24823A828C500524EC1 /* AddCommentViewController.swift */; };
+		D4F4F24B23A828E400524EC1 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4F24A23A828E400524EC1 /* CommentsViewController.swift */; };
+		D4F4F24D23A82FC900524EC1 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4F24C23A82FC900524EC1 /* Comment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +59,9 @@
 		D4EB918A23A505720037DDC0 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		D4EFE9CF23A4ABEC0055C839 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		D4EFE9D123A4AC440055C839 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		D4F4F24823A828C500524EC1 /* AddCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentViewController.swift; sourceTree = "<group>"; };
+		D4F4F24A23A828E400524EC1 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		D4F4F24C23A82FC900524EC1 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		E5998353612A716D693BB977 /* Pods_InstagramApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6E0E792C2EBCFE066DECADB /* Pods-InstagramApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramApp.release.xcconfig"; path = "Target Support Files/Pods-InstagramApp/Pods-InstagramApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +101,7 @@
 				5FABA7F9239873CC000C2EC7 /* User.swift */,
 				5F5F462623A182970021714B /* UserDataSource.swift */,
 				D4EFE9D123A4AC440055C839 /* Post.swift */,
+				D4F4F24C23A82FC900524EC1 /* Comment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -146,6 +153,8 @@
 				D4EFE9CF23A4ABEC0055C839 /* PostDetailViewController.swift */,
 				D4EB918A23A505720037DDC0 /* FeedViewController.swift */,
 				5F4C2D1823A8250300DC7F87 /* ProfileDetailViewController.swift */,
+				D4F4F24823A828C500524EC1 /* AddCommentViewController.swift */,
+				D4F4F24A23A828E400524EC1 /* CommentsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -301,12 +310,15 @@
 				D4EFE9D223A4AC440055C839 /* Post.swift in Sources */,
 				D414415723985EE80084FED9 /* Utilities.swift in Sources */,
 				5F4C2D1B23A829DB00DC7F87 /* ProfileDetailCollectionViewCell.swift in Sources */,
+				D4F4F24B23A828E400524EC1 /* CommentsViewController.swift in Sources */,
 				D4EB918B23A505720037DDC0 /* FeedViewController.swift in Sources */,
 				5F5F462723A182970021714B /* UserDataSource.swift in Sources */,
 				5F81464A23A77DA200CAF14B /* FeedTableViewCell.swift in Sources */,
+				D4F4F24923A828C500524EC1 /* AddCommentViewController.swift in Sources */,
 				5FABA7F723986206000C2EC7 /* SignUpViewController.swift in Sources */,
 				5FEC607F2393D731003BE74A /* SceneDelegate.swift in Sources */,
 				5FABA7FA239873CC000C2EC7 /* User.swift in Sources */,
+				D4F4F24D23A82FC900524EC1 /* Comment.swift in Sources */,
 				D46FFDC823A7BDAD0031D17F /* UIImageViewExtension.swift in Sources */,
 				D414415723985EE80084FED9 /* Utilities.swift in Sources */,
 				5FEC607F2393D731003BE74A /* SceneDelegate.swift in Sources */,
