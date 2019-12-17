@@ -32,6 +32,7 @@
 		D4F4F24923A828C500524EC1 /* AddCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4F24823A828C500524EC1 /* AddCommentViewController.swift */; };
 		D4F4F24B23A828E400524EC1 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4F24A23A828E400524EC1 /* CommentsViewController.swift */; };
 		D4F4F24D23A82FC900524EC1 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4F24C23A82FC900524EC1 /* Comment.swift */; };
+		D4F4F24F23A9103D00524EC1 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4F24E23A9103D00524EC1 /* CommentsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		D4F4F24823A828C500524EC1 /* AddCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentViewController.swift; sourceTree = "<group>"; };
 		D4F4F24A23A828E400524EC1 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		D4F4F24C23A82FC900524EC1 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		D4F4F24E23A9103D00524EC1 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
 		E5998353612A716D693BB977 /* Pods_InstagramApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6E0E792C2EBCFE066DECADB /* Pods-InstagramApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramApp.release.xcconfig"; path = "Target Support Files/Pods-InstagramApp/Pods-InstagramApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +93,7 @@
 			children = (
 				5F81464923A77DA200CAF14B /* FeedTableViewCell.swift */,
 				5F4C2D1A23A829DB00DC7F87 /* ProfileDetailCollectionViewCell.swift */,
+				D4F4F24E23A9103D00524EC1 /* CommentsTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				5FEC607F2393D731003BE74A /* SceneDelegate.swift in Sources */,
 				5FABA7FA239873CC000C2EC7 /* User.swift in Sources */,
 				D4F4F24D23A82FC900524EC1 /* Comment.swift in Sources */,
+				D4F4F24F23A9103D00524EC1 /* CommentsTableViewCell.swift in Sources */,
 				D46FFDC823A7BDAD0031D17F /* UIImageViewExtension.swift in Sources */,
 				D414415723985EE80084FED9 /* Utilities.swift in Sources */,
 				5FEC607F2393D731003BE74A /* SceneDelegate.swift in Sources */,
