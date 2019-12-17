@@ -141,7 +141,7 @@ class FirebaseUtilities {
         let uid = Auth.auth().currentUser!.uid
         let username = Auth.auth().currentUser!.displayName
         let dataRef = Firestore.firestore().collection("comments").document(postId).collection("commentObjects").document()
-        let commentInfo: [String: Any] = ["username": username,
+        let commentInfo: [String: Any] = ["username": username!,
                                           "comment": comment,
                                           "uid": uid]
         dataRef.setData(commentInfo) { (error) in
@@ -153,14 +153,40 @@ class FirebaseUtilities {
             self.delegate?.dismissPage()
         }
     }
-    
+    func addFriend (user: User?) {
+        if let user = user {
+            let selfUid = Auth.auth().currentUser!.uid
+            let friendUid = user.uid!
+            var dataRef = Firestore.firestore().collection("users").document(selfUid).collection("friends").document(friendUid)
+            var friendInfo: [String: Any] = ["uid": friendUid]
+            dataRef.setData(friendInfo) { (error) in
+                if let error = error {
+                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                    return
+                }
+                print("I have added a friend wohoo")
+                self.delegate?.dismissPage()
+            }
+            dataRef = Firestore.firestore().collection("users").document(friendUid).collection("friends").document(selfUid)
+            friendInfo = ["uid": selfUid]
+            dataRef.setData(friendInfo) { (error) in
+                if let error = error {
+                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                    return
+                }
+                print("I have added a friend wohoo")
+                self.delegate?.dismissPage()
+            }
+            
+        }
+    }
     func postImage (description: String, data: Data?) {
         let uid = Auth.auth().currentUser!.uid
         let dataRef = Firestore.firestore().collection("posts")
         let timeStamp = NSDate.timeIntervalSinceReferenceDate
         let imageRef = storageRef.child("posts").child(uid).child("\(timeStamp).jpg")
         if let imageData = data {
-            let uploadTask = imageRef.putData(data!, metadata: nil) { (metaData, error) in
+            let uploadTask = imageRef.putData(imageData, metadata: nil) { (metaData, error) in
                 if let error = error {
                     self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                     return
@@ -171,17 +197,19 @@ class FirebaseUtilities {
                         return
                     }
                     if let url = url {
-                        let postInfo: [String: Any] = ["description": description,
-                                                       "urlToPostImage": url.absoluteString,
-                                                       "username": Auth.auth().currentUser?.displayName!,
-                                                       "postId": String(timeStamp)]
-                        dataRef.document(uid).collection("postObjects").document(String(timeStamp)).setData(postInfo) { (error) in
-                            if let error = error {
-                                self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                                return
+                        if let username = Auth.auth().currentUser?.displayName as String? {
+                            let postInfo: [String: Any] = ["description": description,
+                                                           "urlToPostImage": url.absoluteString,
+                                                           "username": username,
+                                                           "postId": String(timeStamp)]
+                            dataRef.document(uid).collection("postObjects").document(String(timeStamp)).setData(postInfo) { (error) in
+                                if let error = error {
+                                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                                    return
+                                }
+                                print("I have posted wohoo")
+                                self.delegate?.dismissPage()
                             }
-                            print("I have posted wohoo")
-                            self.delegate?.dismissPage()
                         }
                     }
                 }

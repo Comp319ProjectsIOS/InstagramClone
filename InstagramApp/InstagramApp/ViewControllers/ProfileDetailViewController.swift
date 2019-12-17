@@ -61,6 +61,7 @@ class ProfileDetailViewController: UIViewController {
     }
     
     @IBAction func addFriendTapped(_ sender: Any) {
+        firebaseUtilities.addFriend(user: selectedUser)
     }
     
     /*
