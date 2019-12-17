@@ -81,6 +81,13 @@ class FirebaseUtilities {
         }
     }
     
+    func getCurrentUserUid() -> String {
+        if let currentUserUid = Auth.auth().currentUser?.uid {
+             return currentUserUid
+        }
+        return "error"
+    }
+    
     func signUp(email: String?, password: String?, data: Data?, username: String){
         if let email = email {
             if let password = password {
@@ -270,4 +277,5 @@ class FirebaseUtilities {
             }
         }
     }
+    
 }
