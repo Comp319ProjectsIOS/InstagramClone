@@ -43,10 +43,11 @@ class FirebaseUtilities {
     var delegate: FirebaseUtilitiesDelegate?
     let storage = Storage.storage()
     var storageRef: StorageReference
-    var postDict = [String : Any]()
     var userDict = [String : Any]()
     var userArray = [User]()
     var postArray = [Post]()
+    var friendArray = [User]()
+    var friendPostArray = [Post]()
     static let firebaseUtilities = FirebaseUtilities()
     
     private init() {
@@ -218,7 +219,6 @@ class FirebaseUtilities {
     }
     
     func fetchUsers() {
-        postDict = [String : Any]()
         userDict = [String : Any]()
         userArray = []
         postArray = []
@@ -246,6 +246,32 @@ class FirebaseUtilities {
         }
     }
     
+    func fetchFriends() {
+        let dataRef = Firestore.firestore()
+        if let uid = Auth.auth().currentUser?.uid {
+            dataRef.collection("users").document(uid).collection("friends").getDocuments() {(querySnapshot, err) in
+                if let err = err {
+                    self.delegate?.presentAlert(title: "Error", message: err.localizedDescription)
+                } else {
+                    for friend in querySnapshot!.documents {
+                        let friendData = friend.data()
+                        if let friendUid = friendData["uid"] as? String {
+                            var friendObject = User()
+                            let friend = self.userDict[friendUid] as! [String : Any]
+                            if let username = friend["userName"] as? String, let urlToImage = friend["urlToImage"] as? String, let uid = friend["uid"] as? String {
+                                friendObject.imageRef = urlToImage
+                                friendObject.uid = uid
+                                friendObject.userName = username
+                                self.friendArray.append(friendObject)
+                            }
+                            self.fetchPosts(uid: friendUid)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     func fetchPosts(uid: String) {
         let dataRef = Firestore.firestore()
         dataRef.collection("posts").document(uid).collection("postObjects").getDocuments() {(querySnapshot, err) in
@@ -256,7 +282,6 @@ class FirebaseUtilities {
                 for post in querySnapshot!.documents {
                     let postData = post.data()
                     var postObject = Post()
-                    //                    self.postDict.updateValue(postData, forKey: "\(uid)-\(post.documentID)")
                     //adding the post object to the post array...
                     if let description = postData["description"] as? String, let urlToPostImage = postData["urlToPostImage"] as? String, let username = postData["username"] as? String, let postId = postData["postId"] as? String {
                         postObject.description = description
