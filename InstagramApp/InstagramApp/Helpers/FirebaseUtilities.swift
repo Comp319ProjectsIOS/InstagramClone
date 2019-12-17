@@ -18,6 +18,7 @@ protocol FirebaseUtilitiesDelegate {
     func postDataFetched(postList: [Post])
     func userDataFetched(userList: [User])
     func postsForProfileFetched(postList: [Post])
+    func commentsForPostFetched(commentList: [Comment])
 }
 
 extension FirebaseUtilitiesDelegate {
@@ -31,8 +32,11 @@ extension FirebaseUtilitiesDelegate {
     }
     func userDataFetched(userList: [User]) {
     }
-    func postsForProfileFetched(postList: [Post]){
+    func postsForProfileFetched(postList: [Post]) {
     }
+    func commentsForPostFetched(commentList: [Comment]) {
+    }
+
 }
 
 class FirebaseUtilities {
@@ -269,12 +273,20 @@ class FirebaseUtilities {
     }
     
     func fetchComments(postId: String) {
+        var commentsArray: [Comment] = []
         let dataRef = Firestore.firestore()
         dataRef.collection("comments").document(postId).collection("commentObjects").getDocuments { (querySnapshot, err) in
             for comment in querySnapshot!.documents {
                 let commentData = comment.data()
                 var commentObject = Comment()
+                if let commentDescription = commentData["comment"] as? String, let commenterUid = commentData["uid"] as? String, let commenterUserName = commentData["username"] as? String {
+                    commentObject.comment = commentDescription
+                    commentObject.uid = commenterUid
+                    commentObject.username = commenterUserName
+                    commentsArray.append(commentObject)
+                }
             }
+            self.delegate?.commentsForPostFetched(commentList: commentsArray)
         }
     }
     

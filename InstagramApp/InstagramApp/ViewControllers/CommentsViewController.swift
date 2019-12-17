@@ -11,7 +11,7 @@ import UIKit
 extension CommentsViewController: FirebaseUtilitiesDelegate{
     func commentsForPostFetched(commentList: [Comment]) {
         commentsArray = commentList
-//        commentsTableView.reloadData()
+        self.commentsTableView.reloadData()
     }
 }
 
@@ -38,8 +38,8 @@ extension CommentsViewController: UITableViewDataSource {
 }
 
 class CommentsViewController: UIViewController {
-//  add IBOutlet of the table view....
-    
+    @IBOutlet weak var commentsTableView: UITableView!
+    var selectedPost: Post?
     let firebaseUtilities = FirebaseUtilities.getInstance()
     var commentsArray = [Comment]()
     
@@ -50,10 +50,18 @@ class CommentsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
-           firebaseUtilities.delegate = self
-       }
+        super.viewWillAppear(animated)
+        firebaseUtilities.delegate = self
+        getComments()
+    }
     
+    func getComments() {
+        if let post = self.selectedPost {
+            if let postId = post.postId {
+                firebaseUtilities.fetchComments(postId: postId)
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

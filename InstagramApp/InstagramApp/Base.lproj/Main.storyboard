@@ -341,7 +341,7 @@
                                 <rect key="frame" x="273" y="483.5" width="75" height="30"/>
                                 <state key="normal" title="Comments"/>
                                 <connections>
-                                    <segue destination="7TE-XV-GjN" kind="show" id="IJn-lF-Rbc"/>
+                                    <segue destination="7TE-XV-GjN" kind="show" identifier="commentsSegue" id="IJn-lF-Rbc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxf-bs-Scj">
@@ -413,24 +413,24 @@
                                 <rect key="frame" x="0.0" y="270" width="414" height="538"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oG0-xu-j3Z">
-                                    <size key="itemSize" width="138" height="114"/>
+                                    <size key="itemSize" width="124" height="110"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="postCell" id="51s-q5-4hn" customClass="ProfileDetailCollectionViewCell" customModule="InstagramApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="138" height="114"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="124" height="110"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7VT-3Z-oVU">
-                                            <rect key="frame" x="0.0" y="0.0" width="138" height="114"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="124" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Acj-dc-9oM">
-                                                    <rect key="frame" x="10" y="5" width="118" height="89"/>
+                                                    <rect key="frame" x="10" y="5" width="104" height="85"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="78" id="5h3-5z-eat"/>
-                                                        <constraint firstAttribute="width" secondItem="Acj-dc-9oM" secondAttribute="height" multiplier="41:32" id="K5a-Zf-aQE"/>
+                                                        <constraint firstAttribute="width" secondItem="Acj-dc-9oM" secondAttribute="height" multiplier="101:89" id="574-2R-gqk"/>
+                                                        <constraint firstAttribute="height" constant="89" id="5h3-5z-eat"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
@@ -441,7 +441,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="Acj-dc-9oM" secondAttribute="trailing" constant="10" id="lOO-Wg-UWJ"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="138" height="114"/>
+                                        <size key="customSize" width="124" height="110"/>
                                         <connections>
                                             <outlet property="postImageView" destination="Acj-dc-9oM" id="vGh-fl-o12"/>
                                         </connections>
@@ -486,7 +486,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D6I-bw-gD8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="494" y="3291"/>
+            <point key="canvasLocation" x="492.75362318840581" y="3290.625"/>
         </scene>
         <!--Add Comment View Controller-->
         <scene sceneID="wcD-tB-PoC">
@@ -560,22 +560,35 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="115"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmR-tO-2vk">
-                                                    <rect key="frame" x="20" y="11" width="42" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmR-tO-2vk">
+                                                    <rect key="frame" x="20" y="11" width="178" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDn-Dg-FP3">
-                                                    <rect key="frame" x="70" y="11" width="336" height="93"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDn-Dg-FP3">
+                                                    <rect key="frame" x="85" y="37" width="309" height="67"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="67" id="27A-S6-NxA"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="XmR-tO-2vk" firstAttribute="top" secondItem="VyN-fZ-14m" secondAttribute="top" constant="11" id="3Fq-Qj-YxQ"/>
+                                                <constraint firstItem="XmR-tO-2vk" firstAttribute="leading" secondItem="VyN-fZ-14m" secondAttribute="leading" constant="20" id="52T-is-aoI"/>
+                                                <constraint firstAttribute="bottom" secondItem="XDn-Dg-FP3" secondAttribute="bottom" constant="11" id="DH9-HB-JaZ"/>
+                                                <constraint firstItem="XDn-Dg-FP3" firstAttribute="top" secondItem="XmR-tO-2vk" secondAttribute="bottom" constant="5" id="WhS-Ug-Jn7"/>
+                                                <constraint firstItem="XDn-Dg-FP3" firstAttribute="leading" secondItem="VyN-fZ-14m" secondAttribute="leading" constant="85" id="k8i-3o-xA0"/>
+                                                <constraint firstAttribute="trailing" secondItem="XDn-Dg-FP3" secondAttribute="trailing" constant="20" id="qxp-ae-JuP"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="commentLabel" destination="XDn-Dg-FP3" id="J0Q-XE-sFs"/>
+                                            <outlet property="usernameLabel" destination="XmR-tO-2vk" id="pOg-HG-0F6"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -588,6 +601,9 @@
                         <viewLayoutGuide key="safeArea" id="D2e-T0-Ocz"/>
                     </view>
                     <navigationItem key="navigationItem" id="sG8-Vr-SS1"/>
+                    <connections>
+                        <outlet property="commentsTableView" destination="NH5-iU-WEH" id="pQP-4c-NCd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oOm-St-Mb4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

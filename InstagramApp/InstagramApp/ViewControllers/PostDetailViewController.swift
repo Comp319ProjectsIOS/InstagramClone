@@ -61,11 +61,15 @@ class PostDetailViewController: UIViewController {
                 let destination = segue.destination as! AddCommentViewController
                 destination.selectedPost = post
             }
-            
+        } else if segue.identifier == "commentsSegue" {
+            if let post = self.selectedPost {
+                let destination = segue.destination as! CommentsViewController
+                destination.selectedPost = post
+            }
         }
     }
+    
 }
-
 
 
 
