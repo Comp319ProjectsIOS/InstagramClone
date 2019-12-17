@@ -23,7 +23,6 @@ class PostDetailViewController: UIViewController {
         title = "Post Details"
         // Do any additional setup after loading the view.
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         if let post = selectedPost {
             postImage.downloadImage(from: URL(string: post.urlToPostImage!)!)
@@ -57,8 +56,16 @@ class PostDetailViewController: UIViewController {
                     
                 }
             }
+        } else if segue.identifier == "addCommentSegue" {
+            if let post = self.selectedPost {
+                let destination = segue.destination as! AddCommentViewController
+                destination.selectedPost = post
+            }
+            
         }
     }
-    
-    
 }
+
+
+
+

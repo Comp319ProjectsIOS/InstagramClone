@@ -51,6 +51,10 @@ class SignUpViewController: UIViewController {
         firebaseUtilities.delegate = self
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           firebaseUtilities.delegate = self
+       }
     
     @IBAction func signUpTapped(_ sender: Any) {
         guard let email = emailTextField.text, let password = passwordTextField.text, let username = userNameTextField.text else {

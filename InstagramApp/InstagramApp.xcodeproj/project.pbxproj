@@ -146,15 +146,15 @@
 		5FEC60902393D7A0003BE74A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				5FEC60912393D7C1003BE74A /* LoginViewController.swift */,
-				D41441532396F1180084FED9 /* ForgetPasswordViewController.swift */,
-				5FABA7F623986206000C2EC7 /* SignUpViewController.swift */,
-				D414415823986FA20084FED9 /* PostViewController.swift */,
-				D4EFE9CF23A4ABEC0055C839 /* PostDetailViewController.swift */,
-				D4EB918A23A505720037DDC0 /* FeedViewController.swift */,
-				5F4C2D1823A8250300DC7F87 /* ProfileDetailViewController.swift */,
 				D4F4F24823A828C500524EC1 /* AddCommentViewController.swift */,
 				D4F4F24A23A828E400524EC1 /* CommentsViewController.swift */,
+				D4EB918A23A505720037DDC0 /* FeedViewController.swift */,
+				D41441532396F1180084FED9 /* ForgetPasswordViewController.swift */,
+				5FEC60912393D7C1003BE74A /* LoginViewController.swift */,
+				D4EFE9CF23A4ABEC0055C839 /* PostDetailViewController.swift */,
+				D414415823986FA20084FED9 /* PostViewController.swift */,
+				5F4C2D1823A8250300DC7F87 /* ProfileDetailViewController.swift */,
+				5FABA7F623986206000C2EC7 /* SignUpViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";

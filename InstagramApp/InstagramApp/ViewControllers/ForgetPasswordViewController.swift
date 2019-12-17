@@ -30,6 +30,10 @@ class ForgetPasswordViewController: UIViewController {
         firebaseUtilities.delegate = self
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           firebaseUtilities.delegate = self
+       }
     
     @IBAction func resetPasswordTapped(_ sender: Any) {
         firebaseUtilities.userForgotPassword(email: emailTextField.text)

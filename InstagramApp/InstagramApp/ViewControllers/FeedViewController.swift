@@ -46,10 +46,14 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        firebaseUtilities.delegate = self
         firebaseUtilities.fetchUsers()
-        title = "Feed"
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        firebaseUtilities.delegate = self
+        parent?.title = "Feed"
+        
     }
     
 //    @IBAction func refreshTapped(_ sender: Any) {

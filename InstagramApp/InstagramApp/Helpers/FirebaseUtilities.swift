@@ -126,6 +126,22 @@ class FirebaseUtilities {
             }
         }
     }
+    func addComment(postId: String, comment: String) {
+        let uid = Auth.auth().currentUser!.uid
+        let username = Auth.auth().currentUser!.displayName
+        let dataRef = Firestore.firestore().collection("comments").document(postId).collection("commentObjects").document()
+        let commentInfo: [String: Any] = ["username": username,
+                                          "comment": comment,
+                                          "uid": uid]
+        dataRef.setData(commentInfo) { (error) in
+            if let error = error {
+                self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                return
+            }
+            print("I have posted a comment wohoo")
+            self.delegate?.dismissPage()
+        }
+    }
     
     func postImage (description: String, data: Data?) {
         let uid = Auth.auth().currentUser!.uid
@@ -201,7 +217,7 @@ class FirebaseUtilities {
                 for post in querySnapshot!.documents {
                     let postData = post.data()
                     var postObject = Post()
-//                    self.postDict.updateValue(postData, forKey: "\(uid)-\(post.documentID)")
+                    //                    self.postDict.updateValue(postData, forKey: "\(uid)-\(post.documentID)")
                     //adding the post object to the post array...
                     if let description = postData["description"] as? String, let urlToPostImage = postData["urlToPostImage"] as? String, let username = postData["username"] as? String, let postId = postData["postId"] as? String {
                         postObject.description = description
@@ -213,11 +229,12 @@ class FirebaseUtilities {
                     }                                    
                 }
             }
+            self.postArray.sort(by: { $0.postId! > $1.postId! } )
             self.delegate?.postDataFetched(postList: self.postArray)
         }
     }
     
-
+    
     func fetchPostsForProfile(uid: String){
         var postsArray: [Post] = []
         let dataRef = Firestore.firestore()
@@ -240,32 +257,17 @@ class FirebaseUtilities {
                 }
             }
             self.delegate?.postsForProfileFetched(postList: postsArray)
-        }}
-    
-    func fetchComments(postId: String) {
-          let dataRef = Firestore.firestore()        dataRef.collection("comments").document(postId).collection("commentObjects").getDocuments { (querySnapshot, err) in
-                for comment in querySnapshot!.documents {
-                    let commentData = comment.data()
-                    var commentObject = Comment()
-                }
-            }
         }
+        
     }
     
-    func addComment(postId: String, comment: String) {
-        let uid = Auth.auth().currentUser!.uid
-        let username = Auth.auth().currentUser!.displayName
-        let dataRef = Firestore.firestore().collection("comments").document(postId).collection("commentObjects").document()
-        let commentInfo: [String: Any] = ["username": username,
-                                       "comment": comment,
-                                       "uid": uid]
-        dataRef.setData(commentInfo) { (error) in
-            if let error = error {
-                self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                return
+    func fetchComments(postId: String) {
+        let dataRef = Firestore.firestore()
+        dataRef.collection("comments").document(postId).collection("commentObjects").getDocuments { (querySnapshot, err) in
+            for comment in querySnapshot!.documents {
+                let commentData = comment.data()
+                var commentObject = Comment()
             }
-            print("I have posted a comment wohoo")
-            self.delegate?.dismissPage()
         }
     }
 }

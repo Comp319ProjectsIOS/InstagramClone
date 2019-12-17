@@ -8,13 +8,23 @@
 
 import UIKit
 
+extension CommentsViewController: FirebaseUtilitiesDelegate{
+    
+}
+
 class CommentsViewController: UIViewController {
 
+    var firebaseUtilities = FirebaseUtilities.getInstance()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Comments"
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           firebaseUtilities.delegate = self
+       }
     
 
     /*
