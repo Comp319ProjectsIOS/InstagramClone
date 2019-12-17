@@ -13,6 +13,9 @@ extension ProfileDetailViewController: FirebaseUtilitiesDelegate {
         postArray = postList
         postsCollectionView.reloadData()
     }
+    func presentAlert(title: String, message: String) {
+        presentAlertHelper(self, title: title, message: message)
+    }
 }
 
 extension ProfileDetailViewController: UICollectionViewDataSource {
@@ -53,21 +56,21 @@ class ProfileDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
-           firebaseUtilities.delegate = self
-       }
+        super.viewWillAppear(animated)
+        firebaseUtilities.delegate = self
+    }
     
     @IBAction func addFriendTapped(_ sender: Any) {
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

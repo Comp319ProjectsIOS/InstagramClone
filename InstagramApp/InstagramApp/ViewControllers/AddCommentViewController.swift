@@ -12,6 +12,9 @@ extension AddCommentViewController: FirebaseUtilitiesDelegate{
     func dismissPage() {
         self.dismiss(animated: true, completion: nil)
     }
+    func presentAlert(title: String, message: String) {
+        presentAlertHelper(self, title: title, message: message)
+    }
 }
 
 class AddCommentViewController: UIViewController {

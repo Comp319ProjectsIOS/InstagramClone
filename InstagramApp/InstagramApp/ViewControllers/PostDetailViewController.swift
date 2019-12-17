@@ -8,7 +8,9 @@
 
 import UIKit
 extension PostDetailViewController: FirebaseUtilitiesDelegate {
-    
+    func presentAlert(title: String, message: String) {
+        presentAlertHelper(self, title: title, message: message)
+    }
 }
 
 class PostDetailViewController: UIViewController {
@@ -31,10 +33,10 @@ class PostDetailViewController: UIViewController {
         }
         firebaseUtilities.delegate = self
     }
-
+    
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.

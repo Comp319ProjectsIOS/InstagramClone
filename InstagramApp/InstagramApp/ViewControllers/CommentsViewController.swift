@@ -13,6 +13,9 @@ extension CommentsViewController: FirebaseUtilitiesDelegate{
         commentsArray = commentList
         self.commentsTableView.reloadData()
     }
+    func presentAlert(title: String, message: String) {
+        presentAlertHelper(self, title: title, message: message)
+    }
 }
 
 extension CommentsViewController: UITableViewDataSource {
@@ -62,15 +65,15 @@ class CommentsViewController: UIViewController {
             }
         }
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

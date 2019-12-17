@@ -13,6 +13,9 @@ extension MyProfileViewController: FirebaseUtilitiesDelegate {
         postArray = postList
         postsCollectionView.reloadData()
     }
+    func presentAlert(title: String, message: String) {
+        presentAlertHelper(self, title: title, message: message)
+    }
 }
 
 extension MyProfileViewController: UICollectionViewDataSource {
@@ -43,15 +46,15 @@ class MyProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         firebaseUtilities.delegate = self
-        currentUserUid = firebaseUtilities.getCurrentUserUid()
-        getPosts()
-        loadData()
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         firebaseUtilities.delegate = self
+        currentUserUid = firebaseUtilities.getCurrentUserUid()
+        getPosts()
+        loadData()
     }
     
     func getPosts() {
@@ -74,15 +77,15 @@ class MyProfileViewController: UIViewController {
             }
         }
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

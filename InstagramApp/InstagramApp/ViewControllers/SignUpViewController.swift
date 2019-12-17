@@ -29,9 +29,9 @@ extension SignUpViewController: FirebaseUtilitiesDelegate {
         presentAlertHelper(self, title: title, message: message)
     }
     func dismissPage() {
-         if let firstViewController = self.navigationController?.viewControllers.first {
-               self.navigationController?.popToViewController(firstViewController, animated: true)
-           } 
+        if let firstViewController = self.navigationController?.viewControllers.first {
+            self.navigationController?.popToViewController(firstViewController, animated: true)
+        } 
     }
 }
 class SignUpViewController: UIViewController {
@@ -52,13 +52,13 @@ class SignUpViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
-           firebaseUtilities.delegate = self
-       }
+        super.viewWillAppear(animated)
+        firebaseUtilities.delegate = self
+    }
     
     @IBAction func signUpTapped(_ sender: Any) {
         guard let email = emailTextField.text, let password = passwordTextField.text, let username = userNameTextField.text else {
-           return presentAlertHelper(self, title: "Error", message: "Please, fill in all required fields")
+            return presentAlertHelper(self, title: "Error", message: "Please, fill in all required fields")
         }
         if let image = image {
             let data = image.jpegData(compressionQuality: 0.5)
@@ -79,13 +79,13 @@ class SignUpViewController: UIViewController {
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
