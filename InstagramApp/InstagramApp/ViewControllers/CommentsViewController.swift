@@ -9,15 +9,43 @@
 import UIKit
 
 extension CommentsViewController: FirebaseUtilitiesDelegate{
+    func commentsForPostFetched(commentList: [Comment]) {
+        commentsArray = commentList
+//        commentsTableView.reloadData()
+    }
+}
+
+extension CommentsViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return commentsArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "commentsCell", for: indexPath) as! CommentsTableViewCell
+        let comment = commentsArray[indexPath.row]
+        cell.commentLabel.text = comment.comment
+        cell.usernameLabel.text = comment.username
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Comments"
+    }
 }
 
 class CommentsViewController: UIViewController {
-
-    var firebaseUtilities = FirebaseUtilities.getInstance()
+//  add IBOutlet of the table view....
+    
+    let firebaseUtilities = FirebaseUtilities.getInstance()
+    var commentsArray = [Comment]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = "Comments"
         // Do any additional setup after loading the view.
     }
