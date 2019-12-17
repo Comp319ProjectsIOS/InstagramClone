@@ -15,7 +15,7 @@ extension LoginViewController: FirebaseUtilitiesDelegate {
         presentAlertHelper(self, title: title, message: message)
     }
     func loginSuccess() {
-        let vc = self.storyboard?.instantiateViewController(identifier: "postVC")
+        let vc = self.storyboard?.instantiateViewController(identifier: "tabVC")
         self.navigationController?.viewControllers = [vc!]
     }
 }
@@ -24,12 +24,18 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
     
-    let firebaseUtilities = FirebaseUtilities()
+    let firebaseUtilities = FirebaseUtilities.getInstance()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Login"
         firebaseUtilities.delegate = self
         // Do any additional setup after loading the view.
+    }
+    
+     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        firebaseUtilities.delegate = self
     }
     
     @IBAction func loginTapped(_ sender: Any) {

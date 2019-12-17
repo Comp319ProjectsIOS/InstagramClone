@@ -42,7 +42,7 @@ class SignUpViewController: UIViewController {
     
     let picker = UIImagePickerController()
     var image: UIImage?
-    let firebaseUtilities = FirebaseUtilities()
+    let firebaseUtilities = FirebaseUtilities.getInstance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +51,10 @@ class SignUpViewController: UIViewController {
         firebaseUtilities.delegate = self
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           firebaseUtilities.delegate = self
+       }
     
     @IBAction func signUpTapped(_ sender: Any) {
         guard let email = emailTextField.text, let password = passwordTextField.text, let username = userNameTextField.text else {

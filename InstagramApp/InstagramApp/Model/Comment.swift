@@ -1,17 +1,15 @@
 //
-//  Post.swift
+//  Comment.swift
 //  InstagramApp
 //
-//  Created by Melih on 14.12.2019.
+//  Created by Melih on 17.12.2019.
 //  Copyright © 2019 BasakMelih. All rights reserved.
 //
 
 import Foundation
 
-struct Post {
-    var description: String?
-    var urlToPostImage: String?
+struct Comment {
     var username: String?
-    var postId: String?
+    var comment: String?
     var uid: String?
 }

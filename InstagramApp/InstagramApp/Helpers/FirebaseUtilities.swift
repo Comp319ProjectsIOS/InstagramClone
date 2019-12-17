@@ -17,7 +17,7 @@ protocol FirebaseUtilitiesDelegate {
     func loginSuccess()
     func postDataFetched(postList: [Post])
     func userDataFetched(userList: [User])
-    
+    func postsForProfileFetched(postList: [Post])
 }
 
 extension FirebaseUtilitiesDelegate {
@@ -31,6 +31,8 @@ extension FirebaseUtilitiesDelegate {
     }
     func userDataFetched(userList: [User]) {
     }
+    func postsForProfileFetched(postList: [Post]){
+    }
 }
 
 class FirebaseUtilities {
@@ -41,9 +43,14 @@ class FirebaseUtilities {
     var userDict = [String : Any]()
     var userArray = [User]()
     var postArray = [Post]()
+    static let firebaseUtilities = FirebaseUtilities()
     
-    init() {
+    private init() {
         storageRef = storage.reference(forURL: "gs://instagramclone-b86bf.appspot.com")
+    }
+    
+    static func getInstance() -> FirebaseUtilities {
+        return firebaseUtilities
     }
     
     func userForgotPassword(email: String?) {
@@ -72,6 +79,13 @@ class FirebaseUtilities {
                 }
             }
         }
+    }
+    
+    func getCurrentUserUid() -> String {
+        if let currentUserUid = Auth.auth().currentUser?.uid {
+             return currentUserUid
+        }
+        return "error"
     }
     
     func signUp(email: String?, password: String?, data: Data?, username: String){
@@ -117,6 +131,22 @@ class FirebaseUtilities {
                     }
                 }
             }
+        }
+    }
+    func addComment(postId: String, comment: String) {
+        let uid = Auth.auth().currentUser!.uid
+        let username = Auth.auth().currentUser!.displayName
+        let dataRef = Firestore.firestore().collection("comments").document(postId).collection("commentObjects").document()
+        let commentInfo: [String: Any] = ["username": username,
+                                          "comment": comment,
+                                          "uid": uid]
+        dataRef.setData(commentInfo) { (error) in
+            if let error = error {
+                self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                return
+            }
+            print("I have posted a comment wohoo")
+            self.delegate?.dismissPage()
         }
     }
     
@@ -169,7 +199,7 @@ class FirebaseUtilities {
                 for document in querySnapshot!.documents {
                     let userData = document.data()
                     var userObject = User()
-//                    self.userDict.updateValue(document.data(), forKey: document.documentID)
+                    self.userDict.updateValue(document.data(), forKey: document.documentID)
                     //adding user to user array
                     if let username = userData["userName"] as? String, let urlToImage = userData["urlToImage"] as? String, let uid = userData["uid"] as? String {
                         userObject.imageRef = urlToImage
@@ -194,18 +224,58 @@ class FirebaseUtilities {
                 for post in querySnapshot!.documents {
                     let postData = post.data()
                     var postObject = Post()
-//                    self.postDict.updateValue(postData, forKey: "\(uid)-\(post.documentID)")
+                    //                    self.postDict.updateValue(postData, forKey: "\(uid)-\(post.documentID)")
                     //adding the post object to the post array...
                     if let description = postData["description"] as? String, let urlToPostImage = postData["urlToPostImage"] as? String, let username = postData["username"] as? String, let postId = postData["postId"] as? String {
                         postObject.description = description
                         postObject.postId = postId
                         postObject.urlToPostImage = urlToPostImage
                         postObject.username = username
+                        postObject.uid = uid
                         self.postArray.append(postObject)
                     }                                    
                 }
             }
+            self.postArray.sort(by: { $0.postId! > $1.postId! } )
             self.delegate?.postDataFetched(postList: self.postArray)
         }
     }
+    
+    
+    func fetchPostsForProfile(uid: String){
+        var postsArray: [Post] = []
+        let dataRef = Firestore.firestore()
+        dataRef.collection("posts").document(uid).collection("postObjects").getDocuments() {(querySnapshot, err) in
+            if let err = err {
+                self.delegate?.presentAlert(title: "Error", message: err.localizedDescription)
+                return
+            } else {
+                for post in querySnapshot!.documents {
+                    let postData = post.data()
+                    var postObject = Post()
+                    if let description = postData["description"] as? String, let urlToPostImage = postData["urlToPostImage"] as? String, let username = postData["username"] as? String, let postId = postData["postId"] as? String {
+                        postObject.description = description
+                        postObject.postId = postId
+                        postObject.urlToPostImage = urlToPostImage
+                        postObject.username = username
+                        postObject.uid = uid
+                        postsArray.append(postObject)
+                    }
+                }
+            }
+            self.delegate?.postsForProfileFetched(postList: postsArray)
+        }
+        
+    }
+    
+    func fetchComments(postId: String) {
+        let dataRef = Firestore.firestore()
+        dataRef.collection("comments").document(postId).collection("commentObjects").getDocuments { (querySnapshot, err) in
+            for comment in querySnapshot!.documents {
+                let commentData = comment.data()
+                var commentObject = Comment()
+            }
+        }
+    }
+    
 }

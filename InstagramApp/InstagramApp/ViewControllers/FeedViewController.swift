@@ -41,15 +41,19 @@ extension FeedViewController: UITableViewDataSource {
 
 class FeedViewController: UIViewController {
     @IBOutlet weak var feedTableView: UITableView!
-    let firebaseUtilities = FirebaseUtilities()
+    let firebaseUtilities = FirebaseUtilities.getInstance()
     var postArray: [Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        firebaseUtilities.delegate = self
         firebaseUtilities.fetchUsers()
-        title = "Feed"
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        firebaseUtilities.delegate = self
+        parent?.title = "Feed"
+        
     }
     
 //    @IBAction func refreshTapped(_ sender: Any) {
@@ -68,7 +72,6 @@ class FeedViewController: UIViewController {
         if let indexPath = indexPath {
             let post = postArray[indexPath.row]
             let destination = segue.destination as! PostDetailViewController
-            
             destination.selectedPost = post
         }
     }

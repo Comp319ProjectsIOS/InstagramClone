@@ -28,10 +28,8 @@ extension PostViewController: FirebaseUtilitiesDelegate {
         presentAlertHelper(self, title: title, message: message)
     }
     func dismissPage() {
-//        if let vc = self.storyboard?.instantiateViewController(identifier: "feedVC") {
-//            self.reloadInputViews()
-//           }
-    }
+        let vc = self.storyboard?.instantiateViewController(identifier: "tabVC")
+        self.navigationController?.viewControllers = [vc!]    }
 }
 
 class PostViewController: UIViewController {
@@ -40,14 +38,18 @@ class PostViewController: UIViewController {
     
     let picker = UIImagePickerController()
     var image: UIImage?
-    let firebaseUtilities = FirebaseUtilities()
+    let firebaseUtilities = FirebaseUtilities.getInstance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
         firebaseUtilities.delegate = self
-        title = "Post"
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        firebaseUtilities.delegate = self
+        parent?.title = "Post"
     }
     
     @IBAction func postTapped(_ sender: Any) {
