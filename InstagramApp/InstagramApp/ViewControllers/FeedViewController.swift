@@ -13,6 +13,9 @@ extension FeedViewController: FirebaseUtilitiesDelegate {
         self.postArray = postList
         self.feedTableView.reloadData()
     }
+    func presentAlert(title: String, message: String) {
+        presentAlertHelper(self, title: title, message: message)
+    }
 }
 
 extension FeedViewController: UITableViewDataSource {
@@ -56,13 +59,13 @@ class FeedViewController: UIViewController {
         
     }
     
-//    @IBAction func refreshTapped(_ sender: Any) {
-//        firebaseUtilities.fetchUsers()
-//    }
+    //    @IBAction func refreshTapped(_ sender: Any) {
+    //        firebaseUtilities.fetchUsers()
+    //    }
     
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.

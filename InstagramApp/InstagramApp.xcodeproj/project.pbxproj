@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5F1C9DE423A911ED00989EF2 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C9DE323A911EC00989EF2 /* MyProfileViewController.swift */; };
 		5F1C9DE623A913B000989EF2 /* MyProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C9DE523A913B000989EF2 /* MyProfileCollectionViewCell.swift */; };
+		5F3DD11523A96A000042B01C /* HelpScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3DD11423A96A000042B01C /* HelpScreenViewController.swift */; };
+		5F3DD11723A96AFD0042B01C /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3DD11623A96AFD0042B01C /* ChangePasswordViewController.swift */; };
+		5F3DD11923A96B820042B01C /* ChangeProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3DD11823A96B820042B01C /* ChangeProfileImageViewController.swift */; };
 		5F4C2D1923A8250300DC7F87 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4C2D1823A8250300DC7F87 /* ProfileDetailViewController.swift */; };
 		5F4C2D1B23A829DB00DC7F87 /* ProfileDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4C2D1A23A829DB00DC7F87 /* ProfileDetailCollectionViewCell.swift */; };
 		5F5F462723A182970021714B /* UserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F462623A182970021714B /* UserDataSource.swift */; };
@@ -41,6 +44,9 @@
 		2DD4DD3A4921DAE8BEC038C8 /* Pods-InstagramApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramApp.debug.xcconfig"; path = "Target Support Files/Pods-InstagramApp/Pods-InstagramApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5F1C9DE323A911EC00989EF2 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		5F1C9DE523A913B000989EF2 /* MyProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		5F3DD11423A96A000042B01C /* HelpScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpScreenViewController.swift; sourceTree = "<group>"; };
+		5F3DD11623A96AFD0042B01C /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		5F3DD11823A96B820042B01C /* ChangeProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileImageViewController.swift; sourceTree = "<group>"; };
 		5F4C2D1823A8250300DC7F87 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		5F4C2D1A23A829DB00DC7F87 /* ProfileDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		5F5F462623A182970021714B /* UserDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataSource.swift; sourceTree = "<group>"; };
@@ -155,9 +161,12 @@
 			isa = PBXGroup;
 			children = (
 				D4F4F24823A828C500524EC1 /* AddCommentViewController.swift */,
+				5F3DD11623A96AFD0042B01C /* ChangePasswordViewController.swift */,
+				5F3DD11823A96B820042B01C /* ChangeProfileImageViewController.swift */,
 				D4F4F24A23A828E400524EC1 /* CommentsViewController.swift */,
 				D4EB918A23A505720037DDC0 /* FeedViewController.swift */,
 				D41441532396F1180084FED9 /* ForgetPasswordViewController.swift */,
+				5F3DD11423A96A000042B01C /* HelpScreenViewController.swift */,
 				5FEC60912393D7C1003BE74A /* LoginViewController.swift */,
 				5F1C9DE323A911EC00989EF2 /* MyProfileViewController.swift */,
 				D4EFE9CF23A4ABEC0055C839 /* PostDetailViewController.swift */,
@@ -316,11 +325,14 @@
 				5FEC607D2393D731003BE74A /* AppDelegate.swift in Sources */,
 				D41441542396F1180084FED9 /* ForgetPasswordViewController.swift in Sources */,
 				D4EFE9D023A4ABEC0055C839 /* PostDetailViewController.swift in Sources */,
+				5F3DD11923A96B820042B01C /* ChangeProfileImageViewController.swift in Sources */,
 				5F1C9DE423A911ED00989EF2 /* MyProfileViewController.swift in Sources */,
 				D4EFE9D223A4AC440055C839 /* Post.swift in Sources */,
 				D414415723985EE80084FED9 /* Utilities.swift in Sources */,
 				5F4C2D1B23A829DB00DC7F87 /* ProfileDetailCollectionViewCell.swift in Sources */,
 				D4F4F24B23A828E400524EC1 /* CommentsViewController.swift in Sources */,
+				5F3DD11523A96A000042B01C /* HelpScreenViewController.swift in Sources */,
+				5F3DD11723A96AFD0042B01C /* ChangePasswordViewController.swift in Sources */,
 				D4EB918B23A505720037DDC0 /* FeedViewController.swift in Sources */,
 				5F1C9DE623A913B000989EF2 /* MyProfileCollectionViewCell.swift in Sources */,
 				5F5F462723A182970021714B /* UserDataSource.swift in Sources */,

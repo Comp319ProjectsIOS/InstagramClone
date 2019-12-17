@@ -1,51 +1,48 @@
 //
-//  ForgetPasswordViewController.swift
+//  ChangePasswordViewController.swift
 //  InstagramApp
 //
-//  Created by Melih on 3.12.2019.
+//  Created by Başak Çörtük on 17.12.2019.
 //  Copyright © 2019 BasakMelih. All rights reserved.
 //
 
 import UIKit
-import Firebase
-import FirebaseAuth
 
-extension ForgetPasswordViewController: FirebaseUtilitiesDelegate {
+extension ChangePasswordViewController: FirebaseUtilitiesDelegate {
+    func dismissPage() {
+        self.navigationController?.popViewController(animated: true)
+    }
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
     }
-    
-    
 }
 
-class ForgetPasswordViewController: UIViewController {
-    
-    @IBOutlet weak var emailTextField: UITextField!
-    
-    let firebaseUtilities = FirebaseUtilities.getInstance()
+class ChangePasswordViewController: UIViewController {
+    @IBOutlet weak var oldPasswordTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    var firebaseUtilities = FirebaseUtilities.getInstance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Forget Password"
-        firebaseUtilities.delegate = self
+        
         // Do any additional setup after loading the view.
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         firebaseUtilities.delegate = self
-    }
-    
-    @IBAction func resetPasswordTapped(_ sender: Any) {
-        firebaseUtilities.userForgotPassword(email: emailTextField.text)
-    }
-    
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+        title = "Change Password"
+        
     }
     
     
-    
+    @IBAction func changePasswordTapped(_ sender: Any) {
+        if let password = passwordTextField.text {
+            if let oldPassword = oldPasswordTextField.text {
+                firebaseUtilities.changePassword(password: password, oldPassword: oldPassword)
+            }
+        }
+    }
     
     /*
      // MARK: - Navigation

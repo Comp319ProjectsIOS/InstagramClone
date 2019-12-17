@@ -18,6 +18,7 @@ protocol FirebaseUtilitiesDelegate {
     func postDataFetched(postList: [Post])
     func userDataFetched(userList: [User])
     func postsForProfileFetched(postList: [Post])
+    func commentsForPostFetched(commentList: [Comment])
 }
 
 extension FirebaseUtilitiesDelegate {
@@ -31,8 +32,11 @@ extension FirebaseUtilitiesDelegate {
     }
     func userDataFetched(userList: [User]) {
     }
-    func postsForProfileFetched(postList: [Post]){
+    func postsForProfileFetched(postList: [Post]) {
     }
+    func commentsForPostFetched(commentList: [Comment]) {
+    }
+    
 }
 
 class FirebaseUtilities {
@@ -83,7 +87,7 @@ class FirebaseUtilities {
     
     func getCurrentUserUid() -> String {
         if let currentUserUid = Auth.auth().currentUser?.uid {
-             return currentUserUid
+            return currentUserUid
         }
         return "error"
     }
@@ -269,13 +273,82 @@ class FirebaseUtilities {
     }
     
     func fetchComments(postId: String) {
+        var commentsArray: [Comment] = []
         let dataRef = Firestore.firestore()
         dataRef.collection("comments").document(postId).collection("commentObjects").getDocuments { (querySnapshot, err) in
             for comment in querySnapshot!.documents {
                 let commentData = comment.data()
                 var commentObject = Comment()
+                if let commentDescription = commentData["comment"] as? String, let commenterUid = commentData["uid"] as? String, let commenterUserName = commentData["username"] as? String {
+                    commentObject.comment = commentDescription
+                    commentObject.uid = commenterUid
+                    commentObject.username = commenterUserName
+                    commentsArray.append(commentObject)
+                }
             }
+            self.delegate?.commentsForPostFetched(commentList: commentsArray)
         }
     }
     
+    func changePassword(password: String, oldPassword: String) {
+        if let email = Auth.auth().currentUser?.email {
+            let credential = EmailAuthProvider.credential(withEmail: email, password: oldPassword)
+            let user = Auth.auth().currentUser
+            user?.reauthenticate(with: credential, completion: { (authData, error) in
+                if let error = error {
+                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                } else {
+                    // User re-authenticated.
+                    Auth.auth().currentUser?.updatePassword(to: password, completion: { (error) in
+                        if let error = error {
+                            self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                        } else {
+                            self.delegate?.dismissPage()
+                        }
+                    })
+                }
+            })
+        }
+    }
+    
+    func changeProfileImage(data: Data?) {
+        let uid = Auth.auth().currentUser!.uid
+        let username = Auth.auth().currentUser?.displayName
+        let imageRef = storageRef.child("profileImages").child("\(uid).jpg")
+        if let imageData = data {
+            imageRef.delete { (error) in
+                if let error = error{
+                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                } else {
+                    let uploadTask = imageRef.putData(imageData, metadata: nil) { (metaData, error) in
+                        if let error = error {
+                            self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                            return
+                        }
+                        imageRef.downloadURL { (url, error) in
+                            if let error = error {
+                                self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                                return
+                            }
+                            if let url = url {
+                                let userInfo: [String: Any] = ["uid": uid,
+                                                               "userName": username!,
+                                                               "urlToImage": url.absoluteString]
+                                let dataRef = Firestore.firestore().collection("users").document(uid)
+                                dataRef.setData(userInfo) { (error) in
+                                    if let error = error {
+                                        self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                                        return
+                                    }
+                                    print("I have posted wohoo")
+                                    self.fetchUsers()
+                                    self.delegate?.dismissPage()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
