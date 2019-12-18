@@ -12,6 +12,7 @@
 		5F3DD11523A96A000042B01C /* HelpScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3DD11423A96A000042B01C /* HelpScreenViewController.swift */; };
 		5F3DD11723A96AFD0042B01C /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3DD11623A96AFD0042B01C /* ChangePasswordViewController.swift */; };
 		5F3DD11923A96B820042B01C /* ChangeProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3DD11823A96B820042B01C /* ChangeProfileImageViewController.swift */; };
+		5F3DD11B23A98FCB0042B01C /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3DD11A23A98FCB0042B01C /* ExploreViewController.swift */; };
 		5F4C2D1923A8250300DC7F87 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4C2D1823A8250300DC7F87 /* ProfileDetailViewController.swift */; };
 		5F4C2D1B23A829DB00DC7F87 /* ProfileDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4C2D1A23A829DB00DC7F87 /* ProfileDetailCollectionViewCell.swift */; };
 		5F5F462723A182970021714B /* UserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F462623A182970021714B /* UserDataSource.swift */; };
@@ -47,6 +48,7 @@
 		5F3DD11423A96A000042B01C /* HelpScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpScreenViewController.swift; sourceTree = "<group>"; };
 		5F3DD11623A96AFD0042B01C /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		5F3DD11823A96B820042B01C /* ChangeProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileImageViewController.swift; sourceTree = "<group>"; };
+		5F3DD11A23A98FCB0042B01C /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		5F4C2D1823A8250300DC7F87 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		5F4C2D1A23A829DB00DC7F87 /* ProfileDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		5F5F462623A182970021714B /* UserDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataSource.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				D414415823986FA20084FED9 /* PostViewController.swift */,
 				5F4C2D1823A8250300DC7F87 /* ProfileDetailViewController.swift */,
 				5FABA7F623986206000C2EC7 /* SignUpViewController.swift */,
+				5F3DD11A23A98FCB0042B01C /* ExploreViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				5FEC607D2393D731003BE74A /* AppDelegate.swift in Sources */,
 				D41441542396F1180084FED9 /* ForgetPasswordViewController.swift in Sources */,
 				D4EFE9D023A4ABEC0055C839 /* PostDetailViewController.swift in Sources */,
+				5F3DD11B23A98FCB0042B01C /* ExploreViewController.swift in Sources */,
 				5F3DD11923A96B820042B01C /* ChangeProfileImageViewController.swift in Sources */,
 				5F1C9DE423A911ED00989EF2 /* MyProfileViewController.swift in Sources */,
 				D4EFE9D223A4AC440055C839 /* Post.swift in Sources */,

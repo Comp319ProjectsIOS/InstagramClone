@@ -1,24 +1,24 @@
 //
-//  FeedViewController.swift
+//  ExploreViewController.swift
 //  InstagramApp
 //
-//  Created by Melih on 14.12.2019.
+//  Created by Başak Çörtük on 18.12.2019.
 //  Copyright © 2019 BasakMelih. All rights reserved.
 //
 
 import UIKit
 
-extension FeedViewController: FirebaseUtilitiesDelegate {
+extension ExploreViewController: FirebaseUtilitiesDelegate {
     func postDataFetched(postList: [Post]) {
         self.postArray = postList
-        self.feedTableView.reloadData()
+        self.exploreTableView.reloadData()
     }
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
     }
 }
 
-extension FeedViewController: UITableViewDataSource {
+extension ExploreViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -41,28 +41,29 @@ extension FeedViewController: UITableViewDataSource {
         return "Posts"
     }
 }
-
-class FeedViewController: UIViewController {
-    @IBOutlet weak var feedTableView: UITableView!
+class ExploreViewController: UIViewController {
+    @IBOutlet weak var exploreTableView: UITableView!
+    
     let firebaseUtilities = FirebaseUtilities.getInstance()
     var postArray: [Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        firebaseUtilities.fetchFriends()
-        title = "Feed"
+        firebaseUtilities.fetchUsers()
+        title = "Explore"
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         firebaseUtilities.delegate = self
-        parent?.title = "Feed"
+        parent?.title = "Explore"
         
     }
     
     @IBAction func refreshTapped(_ sender: Any) {
-        firebaseUtilities.fetchFriends()
+        firebaseUtilities.fetchUsers()
     }
+    
     
     // MARK: - Navigation
     
@@ -71,7 +72,7 @@ class FeedViewController: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         let cell = sender as! FeedTableViewCell
-        let indexPath = feedTableView.indexPath(for: cell)
+        let indexPath = exploreTableView.indexPath(for: cell)
         if let indexPath = indexPath {
             let post = postArray[indexPath.row]
             let destination = segue.destination as! PostDetailViewController

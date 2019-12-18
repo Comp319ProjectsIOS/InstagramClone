@@ -46,11 +46,13 @@ class MyProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         firebaseUtilities.delegate = self
+        title = "My Profile"
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        parent?.title = "My Profile"
         firebaseUtilities.delegate = self
         currentUserUid = firebaseUtilities.getCurrentUserUid()
         getPosts()
