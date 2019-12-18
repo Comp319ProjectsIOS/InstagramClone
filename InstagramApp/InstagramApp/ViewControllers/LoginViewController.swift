@@ -30,6 +30,10 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         title = "Login"
         firebaseUtilities.delegate = self
+        firebaseUtilities.autoLogin()
+        emailText.text = UserDefaults.standard.string(forKey: "email")
+        passwordText.text = UserDefaults.standard.string(forKey: "password")
+        
         // Do any additional setup after loading the view.
     }
     

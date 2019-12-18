@@ -77,13 +77,27 @@ class FirebaseUtilities {
                     if let error = error {
                         self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                     } else {
+                        UserDefaults.standard.set(email, forKey: "email")
+                        UserDefaults.standard.set(password, forKey: "password")
                         self.delegate?.loginSuccess()
                     }
                 }
             }
         }
     }
-    
+    func autoLogin(){
+        if Auth.auth().currentUser != nil {
+            self.delegate?.loginSuccess()
+        }
+    }
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            self.delegate?.dismissPage()
+        } catch {
+            self.delegate?.presentAlert(title: "Error", message: "There was an error during sign out")
+        }
+    }
     func getCurrentUserUid() -> String {
         if let currentUserUid = Auth.auth().currentUser?.uid {
             return currentUserUid
@@ -123,7 +137,6 @@ class FirebaseUtilities {
                                                     self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                                                     return
                                                 }
-                                                UserDefaults.standard.set(user.user.uid, forKey: "uid")
                                                 self.delegate?.dismissPage()
                                             }
                                         }
