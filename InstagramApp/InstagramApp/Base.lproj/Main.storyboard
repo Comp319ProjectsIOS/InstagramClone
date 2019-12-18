@@ -710,35 +710,35 @@
                                 <rect key="frame" x="0.0" y="293" width="414" height="520"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="i0j-NX-f5p">
-                                    <size key="itemSize" width="136" height="113"/>
+                                    <size key="itemSize" width="121" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="myProfileCell" id="4Ud-gA-E0i" customClass="MyProfileCollectionViewCell" customModule="InstagramApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="136" height="113"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="121" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ao8-MW-osg">
-                                            <rect key="frame" x="0.0" y="0.0" width="136" height="113"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="121" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GeQ-Ia-FPD">
-                                                    <rect key="frame" x="0.0" y="0.0" width="118" height="97"/>
+                                                    <rect key="frame" x="5" y="0.0" width="111" height="95"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="97" id="IZa-fz-Eua"/>
-                                                        <constraint firstAttribute="width" secondItem="GeQ-Ia-FPD" secondAttribute="height" multiplier="118:97" id="izf-ID-o16"/>
+                                                        <constraint firstAttribute="height" constant="97" id="IZa-fz-Eua" userLabel="height = 89"/>
+                                                        <constraint firstAttribute="width" secondItem="GeQ-Ia-FPD" secondAttribute="height" multiplier="118:97" id="izf-ID-o16" userLabel="aspect = 101:89"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="GeQ-Ia-FPD" firstAttribute="leading" secondItem="Ao8-MW-osg" secondAttribute="leading" id="9vh-mx-41W"/>
+                                                <constraint firstItem="GeQ-Ia-FPD" firstAttribute="leading" secondItem="Ao8-MW-osg" secondAttribute="leading" constant="5" id="9vh-mx-41W"/>
                                                 <constraint firstItem="GeQ-Ia-FPD" firstAttribute="top" secondItem="Ao8-MW-osg" secondAttribute="top" id="IZi-AK-01d"/>
-                                                <constraint firstAttribute="bottom" secondItem="GeQ-Ia-FPD" secondAttribute="bottom" constant="16" id="Lzg-I9-q56"/>
-                                                <constraint firstAttribute="trailing" secondItem="GeQ-Ia-FPD" secondAttribute="trailing" constant="18" id="b4b-fR-McR"/>
+                                                <constraint firstAttribute="bottom" secondItem="GeQ-Ia-FPD" secondAttribute="bottom" constant="5" id="Lzg-I9-q56"/>
+                                                <constraint firstAttribute="trailing" secondItem="GeQ-Ia-FPD" secondAttribute="trailing" constant="5" id="b4b-fR-McR"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="136" height="113"/>
+                                        <size key="customSize" width="121" height="100"/>
                                         <connections>
                                             <outlet property="postImagaView" destination="GeQ-Ia-FPD" id="Pul-8d-E98"/>
                                             <segue destination="IuC-YD-HBR" kind="show" identifier="myProfileCellSegue" id="JVB-Gw-n0Y"/>
@@ -784,7 +784,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="crt-k3-Wmu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1116" y="1813"/>
+            <point key="canvasLocation" x="1115.9420289855072" y="1812.7232142857142"/>
         </scene>
         <!--Help Screen View Controller-->
         <scene sceneID="7um-Ky-rB6">
@@ -1070,6 +1070,6 @@
         <image name="plus.rectangle" catalog="system" width="64" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3wD-fb-d0M"/>
+        <segue reference="JVB-Gw-n0Y"/>
     </inferredMetricsTieBreakers>
 </document>
