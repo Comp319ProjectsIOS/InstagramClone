@@ -152,10 +152,12 @@ class FirebaseUtilities {
     func addComment(postId: String, comment: String) {
         let uid = Auth.auth().currentUser!.uid
         let username = Auth.auth().currentUser!.displayName
+        let timeStamp = String(NSDate.timeIntervalSinceReferenceDate)
         let dataRef = Firestore.firestore().collection("comments").document(postId).collection("commentObjects").document()
         let commentInfo: [String: Any] = ["username": username!,
                                           "comment": comment,
-                                          "uid": uid]
+                                          "uid": uid,
+                                          "commentId": timeStamp]
         dataRef.setData(commentInfo) { (error) in
             if let error = error {
                 self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
@@ -334,6 +336,7 @@ class FirebaseUtilities {
                     }
                 }
             }
+            postsArray.sort(by: { $0.postId! > $1.postId! })
             self.delegate?.postsForProfileFetched(postList: postsArray)
         }
     }
@@ -344,13 +347,15 @@ class FirebaseUtilities {
             for comment in querySnapshot!.documents {
                 let commentData = comment.data()
                 var commentObject = Comment()
-                if let commentDescription = commentData["comment"] as? String, let commenterUid = commentData["uid"] as? String, let commenterUserName = commentData["username"] as? String {
+                if let commentDescription = commentData["comment"] as? String, let commenterUid = commentData["uid"] as? String, let commenterUserName = commentData["username"] as? String, let commentId = commentData["commentId"] as? String {
                     commentObject.comment = commentDescription
                     commentObject.uid = commenterUid
                     commentObject.username = commenterUserName
+                    commentObject.commentId = commentId
                     commentsArray.append(commentObject)
                 }
             }
+            commentsArray.sort(by: { $0.commentId! > $1.commentId! })
             self.delegate?.commentsForPostFetched(commentList: commentsArray)
         }
     }

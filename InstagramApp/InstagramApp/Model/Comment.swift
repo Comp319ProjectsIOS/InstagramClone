@@ -12,4 +12,5 @@ struct Comment {
     var username: String?
     var comment: String?
     var uid: String?
+    var commentId: String?
 }
