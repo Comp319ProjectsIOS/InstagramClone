@@ -12,7 +12,7 @@ class HelpScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        parent?.title = "Help Screen"
         // Do any additional setup after loading the view.
     }
     

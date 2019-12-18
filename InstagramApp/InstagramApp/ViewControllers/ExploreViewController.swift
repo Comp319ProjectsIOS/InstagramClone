@@ -49,7 +49,8 @@ class ExploreViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        firebaseUtilities.fetchFriends()
+        firebaseUtilities.fetchUsers()
+        title = "Explore"
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -59,9 +60,9 @@ class ExploreViewController: UIViewController {
         
     }
     
-    //    @IBAction func refreshTapped(_ sender: Any) {
-    //        firebaseUtilities.fetchUsers()
-    //    }
+    @IBAction func refreshTapped(_ sender: Any) {
+        firebaseUtilities.fetchUsers()
+    }
     
     
     // MARK: - Navigation

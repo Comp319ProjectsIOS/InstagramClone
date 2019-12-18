@@ -70,7 +70,6 @@ class FirebaseUtilities {
             }
         }
     }
-    
     func login(email: String?, password: String?) {
         if let email = email {
             if let password = password {
@@ -78,7 +77,6 @@ class FirebaseUtilities {
                     if let error = error {
                         self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                     } else {
-                        print("You are sign in.")
                         self.delegate?.loginSuccess()
                     }
                 }
@@ -120,7 +118,7 @@ class FirebaseUtilities {
                                             let userInfo: [String: Any] = ["uid": user.user.uid,
                                                                            "userName": username,
                                                                            "urlToImage": url.absoluteString]
-                                            let dataRef = Firestore.firestore().collection("users").document(user.user.uid).setData(userInfo) { (error) in
+                                            Firestore.firestore().collection("users").document(user.user.uid).setData(userInfo) { (error) in
                                                 if let error = error {
                                                     self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                                                     return
@@ -150,7 +148,6 @@ class FirebaseUtilities {
                 self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                 return
             }
-            print("I have posted a comment wohoo")
             self.delegate?.dismissPage()
         }
     }
@@ -165,7 +162,6 @@ class FirebaseUtilities {
                     self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                     return
                 }
-                print("I have added a friend wohoo")
                 self.delegate?.dismissPage()
             }
             dataRef = Firestore.firestore().collection("users").document(friendUid).collection("friends").document(selfUid)
@@ -175,7 +171,6 @@ class FirebaseUtilities {
                     self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                     return
                 }
-                print("I have added a friend wohoo")
                 self.delegate?.dismissPage()
             }
             
@@ -208,7 +203,6 @@ class FirebaseUtilities {
                                     self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                                     return
                                 }
-                                print("I have posted wohoo")
                                 self.delegate?.dismissPage()
                             }
                         }
@@ -217,7 +211,6 @@ class FirebaseUtilities {
             }
         }
     }
-    
     func fetchUsers() {
         userDict = [String : Any]()
         userArray = []
@@ -245,8 +238,9 @@ class FirebaseUtilities {
             self.delegate?.userDataFetched(userList: self.userArray)
         }
     }
-    
     func fetchFriends() {
+        friendArray = []
+        friendPostArray = []
         let dataRef = Firestore.firestore()
         if let uid = Auth.auth().currentUser?.uid {
             dataRef.collection("users").document(uid).collection("friends").getDocuments() {(querySnapshot, err) in
@@ -257,22 +251,22 @@ class FirebaseUtilities {
                         let friendData = friend.data()
                         if let friendUid = friendData["uid"] as? String {
                             var friendObject = User()
-                            let friend = self.userDict[friendUid] as! [String : Any]
-                            if let username = friend["userName"] as? String, let urlToImage = friend["urlToImage"] as? String, let uid = friend["uid"] as? String {
-                                friendObject.imageRef = urlToImage
-                                friendObject.uid = uid
-                                friendObject.userName = username
-                                self.friendArray.append(friendObject)
+                            if let friend = self.userDict[friendUid] as? [String : Any] {
+                                if let username = friend["userName"] as? String, let urlToImage = friend["urlToImage"] as? String, let uid = friend["uid"] as? String {
+                                    friendObject.imageRef = urlToImage
+                                    friendObject.uid = uid
+                                    friendObject.userName = username
+                                    self.friendArray.append(friendObject)
+                                }
+                                self.fetchPosts(uid: friendUid, isFriend: true)
                             }
-                            self.fetchPosts(uid: friendUid)
                         }
                     }
                 }
             }
         }
     }
-    
-    func fetchPosts(uid: String) {
+    func fetchPosts(uid: String, isFriend: Bool = false) {
         let dataRef = Firestore.firestore()
         dataRef.collection("posts").document(uid).collection("postObjects").getDocuments() {(querySnapshot, err) in
             if let err = err {
@@ -289,16 +283,23 @@ class FirebaseUtilities {
                         postObject.urlToPostImage = urlToPostImage
                         postObject.username = username
                         postObject.uid = uid
-                        self.postArray.append(postObject)
-                    }                                    
+                        if isFriend {
+                            self.friendPostArray.append(postObject)
+                        } else {
+                            self.postArray.append(postObject)
+                        }
+                    }
                 }
             }
-            self.postArray.sort(by: { $0.postId! > $1.postId! } )
-            self.delegate?.postDataFetched(postList: self.postArray)
+            if isFriend {
+                self.friendPostArray.sort(by: { $0.postId! > $1.postId! } )
+                self.delegate?.postDataFetched(postList: self.friendPostArray)
+            } else {
+                self.postArray.sort(by: { $0.postId! > $1.postId! } )
+                self.delegate?.postDataFetched(postList: self.postArray)
+            }
         }
     }
-    
-    
     func fetchPostsForProfile(uid: String){
         var postsArray: [Post] = []
         let dataRef = Firestore.firestore()
@@ -322,9 +323,7 @@ class FirebaseUtilities {
             }
             self.delegate?.postsForProfileFetched(postList: postsArray)
         }
-        
     }
-    
     func fetchComments(postId: String) {
         var commentsArray: [Comment] = []
         let dataRef = Firestore.firestore()
@@ -342,7 +341,6 @@ class FirebaseUtilities {
             self.delegate?.commentsForPostFetched(commentList: commentsArray)
         }
     }
-    
     func changePassword(password: String, oldPassword: String) {
         if let email = Auth.auth().currentUser?.email {
             let credential = EmailAuthProvider.credential(withEmail: email, password: oldPassword)
@@ -363,7 +361,6 @@ class FirebaseUtilities {
             })
         }
     }
-    
     func changeProfileImage(data: Data?) {
         let uid = Auth.auth().currentUser!.uid
         let username = Auth.auth().currentUser?.displayName
@@ -393,7 +390,6 @@ class FirebaseUtilities {
                                         self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                                         return
                                     }
-                                    print("I have posted wohoo")
                                     self.fetchUsers()
                                     self.delegate?.dismissPage()
                                 }

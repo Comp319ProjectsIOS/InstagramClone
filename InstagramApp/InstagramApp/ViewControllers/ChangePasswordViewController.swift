@@ -24,15 +24,13 @@ class ChangePasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "Change Password"
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         firebaseUtilities.delegate = self
-        title = "Change Password"
-        
     }
     
     

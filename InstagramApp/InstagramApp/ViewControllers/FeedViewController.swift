@@ -49,7 +49,8 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        firebaseUtilities.fetchUsers()
+        firebaseUtilities.fetchFriends()
+        title = "Feed"
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -59,10 +60,9 @@ class FeedViewController: UIViewController {
         
     }
     
-    //    @IBAction func refreshTapped(_ sender: Any) {
-    //        firebaseUtilities.fetchUsers()
-    //    }
-    
+    @IBAction func refreshTapped(_ sender: Any) {
+        firebaseUtilities.fetchFriends()
+    }
     
     // MARK: - Navigation
     

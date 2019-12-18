@@ -49,6 +49,7 @@ class ProfileDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         firebaseUtilities.delegate = self
+        title = "Profile Detail"
         if let user = selectedUser {
             usernameLabel.text = user.userName
             profileImageView.downloadImage(from: URL(string: user.imageRef!)!)

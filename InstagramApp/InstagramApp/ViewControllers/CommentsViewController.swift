@@ -48,7 +48,6 @@ class CommentsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         title = "Comments"
         // Do any additional setup after loading the view.
     }
