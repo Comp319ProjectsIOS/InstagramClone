@@ -99,8 +99,8 @@ class FirebaseUtilities {
         }
     }
     func getCurrentUserUid() -> String {
-        if let currentUserUid = Auth.auth().currentUser?.uid {
-            return currentUserUid
+        if let currentUser = Auth.auth().currentUser {
+            return currentUser.uid
         }
         return "error"
     }
@@ -137,6 +137,8 @@ class FirebaseUtilities {
                                                     self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                                                     return
                                                 }
+                                                UserDefaults.standard.set(email, forKey: "email")
+                                                UserDefaults.standard.set(password, forKey: "password")
                                                 self.delegate?.dismissPage()
                                             }
                                         }
@@ -150,75 +152,81 @@ class FirebaseUtilities {
         }
     }
     func addComment(postId: String, comment: String) {
-        let uid = Auth.auth().currentUser!.uid
-        let username = Auth.auth().currentUser!.displayName
-        let timeStamp = String(NSDate.timeIntervalSinceReferenceDate)
-        let dataRef = Firestore.firestore().collection("comments").document(postId).collection("commentObjects").document()
-        let commentInfo: [String: Any] = ["username": username!,
-                                          "comment": comment,
-                                          "uid": uid,
-                                          "commentId": timeStamp]
-        dataRef.setData(commentInfo) { (error) in
-            if let error = error {
-                self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                return
+        if let currentUser = Auth.auth().currentUser {
+            let uid = currentUser.uid
+            let username = currentUser.displayName
+            let timeStamp = String(NSDate.timeIntervalSinceReferenceDate)
+            let dataRef = Firestore.firestore().collection("comments").document(postId).collection("commentObjects").document()
+            let commentInfo: [String: Any] = ["username": username!,
+                                              "comment": comment,
+                                              "uid": uid,
+                                              "commentId": timeStamp]
+            dataRef.setData(commentInfo) { (error) in
+                if let error = error {
+                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                    return
+                }
+                self.delegate?.dismissPage()
             }
-            self.delegate?.dismissPage()
         }
     }
     func addFriend (user: User?) {
         if let user = user {
-            let selfUid = Auth.auth().currentUser!.uid
-            let friendUid = user.uid!
-            var dataRef = Firestore.firestore().collection("users").document(selfUid).collection("friends").document(friendUid)
-            var friendInfo: [String: Any] = ["uid": friendUid]
-            dataRef.setData(friendInfo) { (error) in
-                if let error = error {
-                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                    return
-                }
-                self.delegate?.dismissPage()
-            }
-            dataRef = Firestore.firestore().collection("users").document(friendUid).collection("friends").document(selfUid)
-            friendInfo = ["uid": selfUid]
-            dataRef.setData(friendInfo) { (error) in
-                if let error = error {
-                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                    return
-                }
-                self.delegate?.dismissPage()
-            }
-            
-        }
-    }
-    func postImage (description: String, data: Data?) {
-        let uid = Auth.auth().currentUser!.uid
-        let dataRef = Firestore.firestore().collection("posts")
-        let timeStamp = NSDate.timeIntervalSinceReferenceDate
-        let imageRef = storageRef.child("posts").child(uid).child("\(timeStamp).jpg")
-        if let imageData = data {
-            let uploadTask = imageRef.putData(imageData, metadata: nil) { (metaData, error) in
-                if let error = error {
-                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                    return
-                }
-                imageRef.downloadURL { (url, error) in
+            if let currentUser = Auth.auth().currentUser {
+                let selfUid = currentUser.uid
+                let friendUid = user.uid!
+                var dataRef = Firestore.firestore().collection("users").document(selfUid).collection("friends").document(friendUid)
+                var friendInfo: [String: Any] = ["uid": friendUid]
+                dataRef.setData(friendInfo) { (error) in
                     if let error = error {
                         self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                         return
                     }
-                    if let url = url {
-                        if let username = Auth.auth().currentUser?.displayName as String? {
-                            let postInfo: [String: Any] = ["description": description,
-                                                           "urlToPostImage": url.absoluteString,
-                                                           "username": username,
-                                                           "postId": String(timeStamp)]
-                            dataRef.document(uid).collection("postObjects").document(String(timeStamp)).setData(postInfo) { (error) in
-                                if let error = error {
-                                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                                    return
+                    self.delegate?.dismissPage()
+                }
+                dataRef = Firestore.firestore().collection("users").document(friendUid).collection("friends").document(selfUid)
+                friendInfo = ["uid": selfUid]
+                dataRef.setData(friendInfo) { (error) in
+                    if let error = error {
+                        self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                        return
+                    }
+                    self.delegate?.dismissPage()
+                }
+                
+            }
+        }
+    }
+    func postImage (description: String, data: Data?) {
+        if let currentUser = Auth.auth().currentUser {
+            let uid = currentUser.uid
+            let dataRef = Firestore.firestore().collection("posts")
+            let timeStamp = NSDate.timeIntervalSinceReferenceDate
+            let imageRef = storageRef.child("posts").child(uid).child("\(timeStamp).jpg")
+            if let imageData = data {
+                let uploadTask = imageRef.putData(imageData, metadata: nil) { (metaData, error) in
+                    if let error = error {
+                        self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                        return
+                    }
+                    imageRef.downloadURL { (url, error) in
+                        if let error = error {
+                            self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                            return
+                        }
+                        if let url = url {
+                            if let username = currentUser.displayName as String? {
+                                let postInfo: [String: Any] = ["description": description,
+                                                               "urlToPostImage": url.absoluteString,
+                                                               "username": username,
+                                                               "postId": String(timeStamp)]
+                                dataRef.document(uid).collection("postObjects").document(String(timeStamp)).setData(postInfo) { (error) in
+                                    if let error = error {
+                                        self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                                        return
+                                    }
+                                    self.delegate?.dismissPage()
                                 }
-                                self.delegate?.dismissPage()
                             }
                         }
                     }
@@ -257,7 +265,8 @@ class FirebaseUtilities {
         friendArray = []
         friendPostArray = []
         let dataRef = Firestore.firestore()
-        if let uid = Auth.auth().currentUser?.uid {
+        if let currentUser = Auth.auth().currentUser {
+            let uid = currentUser.uid
             dataRef.collection("users").document(uid).collection("friends").getDocuments() {(querySnapshot, err) in
                 if let err = err {
                     self.delegate?.presentAlert(title: "Error", message: err.localizedDescription)
@@ -360,56 +369,59 @@ class FirebaseUtilities {
         }
     }
     func changePassword(password: String, oldPassword: String) {
-        if let email = Auth.auth().currentUser?.email {
-            let credential = EmailAuthProvider.credential(withEmail: email, password: oldPassword)
-            let user = Auth.auth().currentUser
-            user?.reauthenticate(with: credential, completion: { (authData, error) in
-                if let error = error {
-                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                } else {
-                    // User re-authenticated.
-                    Auth.auth().currentUser?.updatePassword(to: password, completion: { (error) in
-                        if let error = error {
-                            self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                        } else {
-                            self.delegate?.dismissPage()
-                        }
-                    })
-                }
-            })
+        if let currentUser = Auth.auth().currentUser {
+            if let email = currentUser.email {
+                let credential = EmailAuthProvider.credential(withEmail: email, password: oldPassword)
+                currentUser.reauthenticate(with: credential, completion: { (authData, error) in
+                    if let error = error {
+                        self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                    } else {
+                        // User re-authenticated.
+                        Auth.auth().currentUser?.updatePassword(to: password, completion: { (error) in
+                            if let error = error {
+                                self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                            } else {
+                                self.delegate?.dismissPage()
+                            }
+                        })
+                    }
+                })
+            }
         }
     }
     func changeProfileImage(data: Data?) {
-        let uid = Auth.auth().currentUser!.uid
-        let username = Auth.auth().currentUser?.displayName
-        let imageRef = storageRef.child("profileImages").child("\(uid).jpg")
-        if let imageData = data {
-            imageRef.delete { (error) in
-                if let error = error{
-                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                } else {
-                    let uploadTask = imageRef.putData(imageData, metadata: nil) { (metaData, error) in
-                        if let error = error {
-                            self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                            return
-                        }
-                        imageRef.downloadURL { (url, error) in
+        if let currentUser = Auth.auth().currentUser {
+        let uid = currentUser.uid
+        let username = currentUser.displayName
+            let imageRef = storageRef.child("profileImages").child("\(uid).jpg")
+            if let imageData = data {
+                imageRef.delete { (error) in
+                    if let error = error{
+                        self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                    } else {
+                        let uploadTask = imageRef.putData(imageData, metadata: nil) { (metaData, error) in
                             if let error = error {
                                 self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                                 return
                             }
-                            if let url = url {
-                                let userInfo: [String: Any] = ["uid": uid,
-                                                               "userName": username!,
-                                                               "urlToImage": url.absoluteString]
-                                let dataRef = Firestore.firestore().collection("users").document(uid)
-                                dataRef.setData(userInfo) { (error) in
-                                    if let error = error {
-                                        self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
-                                        return
+                            imageRef.downloadURL { (url, error) in
+                                if let error = error {
+                                    self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                                    return
+                                }
+                                if let url = url {
+                                    let userInfo: [String: Any] = ["uid": uid,
+                                                                   "userName": username!,
+                                                                   "urlToImage": url.absoluteString]
+                                    let dataRef = Firestore.firestore().collection("users").document(uid)
+                                    dataRef.setData(userInfo) { (error) in
+                                        if let error = error {
+                                            self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                                            return
+                                        }
+                                        self.fetchUsers()
+                                        self.delegate?.dismissPage()
                                     }
-                                    self.fetchUsers()
-                                    self.delegate?.dismissPage()
                                 }
                             }
                         }
