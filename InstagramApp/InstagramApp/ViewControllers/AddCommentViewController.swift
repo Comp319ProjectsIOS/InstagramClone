@@ -10,16 +10,21 @@ import UIKit
 
 extension AddCommentViewController: FirebaseUtilitiesDelegate{
     func dismissPage() {
+        activateIndicator(activityIndicator: self.activityIndicator, viewController: self, bool: false)
         self.dismiss(animated: true, completion: nil)
     }
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
+    }
+    func startActivityIndicator(){
+        activateIndicator(activityIndicator: self.activityIndicator, viewController: self, bool: true)
     }
 }
 
 class AddCommentViewController: UIViewController {
     @IBOutlet weak var commentTextView: UITextView!
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var selectedPost: Post?
     let firebaseUtilities = FirebaseUtilities.getInstance()
     

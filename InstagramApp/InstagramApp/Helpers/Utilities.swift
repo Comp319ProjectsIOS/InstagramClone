@@ -15,6 +15,14 @@ public func presentAlertHelper(_ viewController: UIViewController, title: String
     viewController.present(alert, animated: true, completion: nil)
 }
 
-public func showViewController() {
+public func activateIndicator(activityIndicator: UIActivityIndicatorView, viewController: UIViewController, bool: Bool) {
+    if bool {
+        activityIndicator.center = viewController.view.center
+        activityIndicator.hidesWhenStopped = true
+        viewController.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+    } else {
+        activityIndicator.stopAnimating()
+    }
     
 }

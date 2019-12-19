@@ -10,10 +10,15 @@ import UIKit
 
 extension ChangePasswordViewController: FirebaseUtilitiesDelegate {
     func dismissPage() {
+        activateIndicator(activityIndicator: self.activityIndicator, viewController: self, bool: true)
+        
         self.navigationController?.popViewController(animated: true)
     }
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
+    }
+    func startActivityIndicator(){
+        activateIndicator(activityIndicator: self.activityIndicator, viewController: self, bool: true)
     }
 }
 
@@ -21,7 +26,7 @@ class ChangePasswordViewController: UIViewController {
     @IBOutlet weak var oldPasswordTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     var firebaseUtilities = FirebaseUtilities.getInstance()
-    
+    var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Change Password"

@@ -19,6 +19,7 @@ protocol FirebaseUtilitiesDelegate {
     func userDataFetched(userList: [User])
     func postsForProfileFetched(postList: [Post])
     func commentsForPostFetched(commentList: [Comment])
+    func startActivityIndicator()
 }
 
 extension FirebaseUtilitiesDelegate {
@@ -36,7 +37,8 @@ extension FirebaseUtilitiesDelegate {
     }
     func commentsForPostFetched(commentList: [Comment]) {
     }
-    
+    func startActivityIndicator(){
+    }
 }
 
 class FirebaseUtilities {
@@ -166,6 +168,7 @@ class FirebaseUtilities {
                     self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                     return
                 }
+                self.delegate?.startActivityIndicator()
                 self.delegate?.dismissPage()
             }
         }
