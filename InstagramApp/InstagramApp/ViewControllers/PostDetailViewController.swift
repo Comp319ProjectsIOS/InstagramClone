@@ -54,8 +54,12 @@ class PostDetailViewController: UIViewController {
                         }
                         destination.selectedUser = user
                         firebaseUtilities.fetchPostsForProfile(uid: userId)
+                        if(firebaseUtilities.friendArray.contains(user)) {
+                            destination.buttonState = 1
+                        } else {
+                            destination.buttonState = 0
+                        }
                     }
-                    
                 }
             }
         } else if segue.identifier == "addCommentSegue" {

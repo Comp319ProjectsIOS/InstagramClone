@@ -19,6 +19,7 @@ protocol FirebaseUtilitiesDelegate {
     func userDataFetched(userList: [User])
     func postsForProfileFetched(postList: [Post])
     func commentsForPostFetched(commentList: [Comment])
+    func changeUI()
 }
 
 extension FirebaseUtilitiesDelegate {
@@ -36,7 +37,8 @@ extension FirebaseUtilitiesDelegate {
     }
     func commentsForPostFetched(commentList: [Comment]) {
     }
-    
+    func changeUI(){
+    }
 }
 
 class FirebaseUtilities {
@@ -182,7 +184,6 @@ class FirebaseUtilities {
                         self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                         return
                     }
-                    self.delegate?.dismissPage()
                 }
                 dataRef = Firestore.firestore().collection("users").document(friendUid).collection("friends").document(selfUid)
                 friendInfo = ["uid": selfUid]
@@ -191,12 +192,39 @@ class FirebaseUtilities {
                         self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                         return
                     }
-                    self.delegate?.dismissPage()
+                    self.fetchFriends()
+                    self.delegate?.changeUI()
                 }
                 
             }
         }
     }
+    
+    func deleteFriend (user: User?) {
+        if let user = user {
+            if let currentUser = Auth.auth().currentUser {
+                let selfUid = currentUser.uid
+                let friendUid = user.uid!
+                var dataRef = Firestore.firestore().collection("users").document(selfUid).collection("friends").document(friendUid)
+                dataRef.delete { (error) in
+                    if let error = error {
+                        self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                        return
+                    }
+                }
+                dataRef = Firestore.firestore().collection("users").document(friendUid).collection("friends").document(selfUid)
+                dataRef.delete { (error) in
+                    if let error = error {
+                        self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
+                        return
+                    }
+                    self.fetchFriends()
+                    self.delegate?.changeUI()
+                }
+            }
+        }
+    }
+    
     func postImage (description: String, data: Data?) {
         if let currentUser = Auth.auth().currentUser {
             let uid = currentUser.uid

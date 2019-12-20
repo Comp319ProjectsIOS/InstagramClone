@@ -50,13 +50,13 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        firebaseUtilities.fetchFriends()
         title = "Feed"
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         firebaseUtilities.delegate = self
+        firebaseUtilities.fetchFriends()
         parent?.title = "Feed"
         
     }

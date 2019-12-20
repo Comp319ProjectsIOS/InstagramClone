@@ -16,6 +16,15 @@ extension ProfileDetailViewController: FirebaseUtilitiesDelegate {
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
     }
+    func changeUI() {
+        if (buttonState == 0) {
+            buttonState = 1
+            addFriendButton.setTitle("Remove", for: .normal)
+        } else {
+            buttonState = 0
+            addFriendButton.setTitle("Add Friend", for: .normal)
+        }
+    }
 }
 
 extension ProfileDetailViewController: UICollectionViewDataSource {
@@ -42,9 +51,11 @@ class ProfileDetailViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var postsCollectionView: UICollectionView!
+    @IBOutlet weak var addFriendButton: UIButton!
     var selectedUser: User?
     let firebaseUtilities = FirebaseUtilities.getInstance()
     var postArray: [Post] = []
+    var buttonState: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,10 +70,19 @@ class ProfileDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         firebaseUtilities.delegate = self
+        if (buttonState == 0) {
+            addFriendButton.setTitle("Add Friends", for: .normal)
+        } else {
+            addFriendButton.setTitle("Remove", for: .normal)
+        }
     }
     
     @IBAction func addFriendTapped(_ sender: Any) {
-        firebaseUtilities.addFriend(user: selectedUser)
+        if (buttonState == 0) {
+            firebaseUtilities.addFriend(user: selectedUser)
+        } else {
+            firebaseUtilities.deleteFriend(user: selectedUser)
+        }
     }
     
     
