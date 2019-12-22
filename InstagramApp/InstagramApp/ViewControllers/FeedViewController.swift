@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 extension FeedViewController: FirebaseUtilitiesDelegate {
     func postDataFetched(postList: [Post]) {
@@ -30,8 +31,8 @@ extension FeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! FeedTableViewCell
         let post = postArray[indexPath.row]
-        cell.postImageView.image = nil
-        cell.postImageView.downloadImage(from: URL(string: post.urlToPostImage!)!)
+        let url = URL(string: post.urlToPostImage!)
+        cell.postImageView.kf.setImage(with: url)
         cell.usernameLabel.text = post.username
         cell.descriptionLabel.text = post.description
         
