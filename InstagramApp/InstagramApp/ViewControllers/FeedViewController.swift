@@ -65,6 +65,7 @@ class FeedViewController: UIViewController {
     }
     
     @IBAction func refreshTapped(_ sender: Any) {
+        showActivityIndicator()
         firebaseUtilities.fetchFriends()
     }
     

@@ -559,9 +559,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NH5-iU-WEH">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NH5-iU-WEH">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="commentsCell" rowHeight="115" id="w6l-Rj-Gvs" customClass="CommentsTableViewCell" customModule="InstagramApp" customModuleProvider="target">
@@ -577,7 +576,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDn-Dg-FP3">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDn-Dg-FP3">
                                                     <rect key="frame" x="85" y="37" width="309" height="67"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="67" id="27A-S6-NxA"/>
@@ -609,6 +608,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="D2e-T0-Ocz" firstAttribute="bottom" secondItem="NH5-iU-WEH" secondAttribute="bottom" id="0l3-cl-r0R"/>
+                            <constraint firstItem="D2e-T0-Ocz" firstAttribute="trailing" secondItem="NH5-iU-WEH" secondAttribute="trailing" id="4SX-UV-jf7"/>
+                            <constraint firstItem="NH5-iU-WEH" firstAttribute="top" secondItem="D2e-T0-Ocz" secondAttribute="top" id="vEB-qK-d76"/>
+                            <constraint firstItem="NH5-iU-WEH" firstAttribute="leading" secondItem="D2e-T0-Ocz" secondAttribute="leading" id="w1t-kt-U1d"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="D2e-T0-Ocz"/>
                     </view>
                     <navigationItem key="navigationItem" id="sG8-Vr-SS1"/>
@@ -618,7 +623,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oOm-St-Mb4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1341" y="3269"/>
+            <point key="canvasLocation" x="-1342.0289855072465" y="3268.5267857142858"/>
         </scene>
         <!--Post-->
         <scene sceneID="QD4-TJ-e7n">
