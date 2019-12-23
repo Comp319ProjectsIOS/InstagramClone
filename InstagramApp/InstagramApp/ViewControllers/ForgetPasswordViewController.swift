@@ -12,6 +12,7 @@ import FirebaseAuth
 
 extension ForgetPasswordViewController: FirebaseUtilitiesDelegate {
     func presentAlert(title: String, message: String) {
+        hideActivityIndicator()
         presentAlertHelper(self, title: title, message: message)
     }
     
@@ -36,6 +37,7 @@ class ForgetPasswordViewController: UIViewController {
     }
     
     @IBAction func resetPasswordTapped(_ sender: Any) {
+        showActivityIndicator()
         firebaseUtilities.userForgotPassword(email: emailTextField.text)
     }
     

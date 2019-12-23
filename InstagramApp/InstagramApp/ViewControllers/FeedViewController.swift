@@ -13,6 +13,7 @@ extension FeedViewController: FirebaseUtilitiesDelegate {
     func postDataFetched(postList: [Post]) {
         self.postArray = postList
         self.feedTableView.reloadData()
+        hideActivityIndicator()
     }
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
@@ -57,6 +58,7 @@ class FeedViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         firebaseUtilities.delegate = self
+        showActivityIndicator()
         firebaseUtilities.fetchFriends()
         parent?.title = "Feed"
         

@@ -10,6 +10,7 @@ import UIKit
 
 extension ChangePasswordViewController: FirebaseUtilitiesDelegate {
     func dismissPage() {
+        hideActivityIndicator()
         self.navigationController?.popViewController(animated: true)
     }
     func presentAlert(title: String, message: String) {
@@ -37,6 +38,7 @@ class ChangePasswordViewController: UIViewController {
     @IBAction func changePasswordTapped(_ sender: Any) {
         if let password = passwordTextField.text {
             if let oldPassword = oldPasswordTextField.text {
+                showActivityIndicator()
                 firebaseUtilities.changePassword(password: password, oldPassword: oldPassword)
             }
         }

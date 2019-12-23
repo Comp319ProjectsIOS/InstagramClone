@@ -13,6 +13,7 @@ extension ExploreViewController: FirebaseUtilitiesDelegate {
     func postDataFetched(postList: [Post]) {
         self.postArray = postList
         self.exploreTableView.reloadData()
+        hideActivityIndicator()
     }
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
@@ -51,6 +52,7 @@ class ExploreViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showActivityIndicator()
         firebaseUtilities.fetchUsers()
         title = "Explore"
         // Do any additional setup after loading the view.
@@ -63,6 +65,7 @@ class ExploreViewController: UIViewController {
     }
     
     @IBAction func refreshTapped(_ sender: Any) {
+        showActivityIndicator()
         firebaseUtilities.fetchUsers()
     }
     

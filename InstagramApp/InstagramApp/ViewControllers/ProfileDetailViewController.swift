@@ -12,6 +12,7 @@ extension ProfileDetailViewController: FirebaseUtilitiesDelegate {
     func postsForProfileFetched(postList: [Post]) {
         postArray = postList
         postsCollectionView.reloadData()
+        hideActivityIndicator()
     }
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
@@ -39,7 +40,7 @@ extension ProfileDetailViewController: UICollectionViewDataSource {
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! ProfileDetailCollectionViewCell
         let index = indexPath.row
         let post = postArray[index]
-        item.postImageView.downloadImage(from: URL(string: post.urlToPostImage!)!)
+        item.postImageView.kf.setImage(with: URL(string: post.urlToPostImage!))
         return item
     }
     
@@ -63,7 +64,7 @@ class ProfileDetailViewController: UIViewController {
         title = "Profile Detail"
         if let user = selectedUser {
             usernameLabel.text = user.userName
-            profileImageView.downloadImage(from: URL(string: user.imageRef!)!)
+            profileImageView.kf.setImage(with: URL(string: user.imageRef!)!)
         }
         // Do any additional setup after loading the view.
     }
@@ -78,11 +79,13 @@ class ProfileDetailViewController: UIViewController {
     }
     
     @IBAction func addFriendTapped(_ sender: Any) {
+        showActivityIndicator()
         if (buttonState == 0) {
             firebaseUtilities.addFriend(user: selectedUser)
         } else {
             firebaseUtilities.deleteFriend(user: selectedUser)
         }
+        hideActivityIndicator()
     }
     
     

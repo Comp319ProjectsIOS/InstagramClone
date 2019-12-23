@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Kingfisher
+
 extension PostDetailViewController: FirebaseUtilitiesDelegate {
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
@@ -27,7 +29,7 @@ class PostDetailViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         if let post = selectedPost {
-            postImage.downloadImage(from: URL(string: post.urlToPostImage!)!)
+            postImage.kf.setImage(with: URL(string: post.urlToPostImage!))
             postDescriptionLabel.text = post.description
             usernameButton.setTitle(post.username, for: .normal)
         }
