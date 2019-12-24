@@ -9,6 +9,6 @@
 import UIKit
 
 class MyProfileCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var postImagaView: UIImageView!
+    @IBOutlet weak var postImageView: UIImageView!
     
 }

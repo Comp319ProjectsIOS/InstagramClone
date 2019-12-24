@@ -13,6 +13,7 @@ extension HelpScreenViewController: FirebaseUtilitiesDelegate {
         presentAlertHelper(self, title: title, message: message)
     }
     func dismissPage(){
+        hideActivityIndicator()
         let vc = self.storyboard?.instantiateViewController(identifier: "loginVC")
         self.navigationController?.viewControllers = [vc!]
     }
@@ -24,11 +25,12 @@ class HelpScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         parent?.title = "Help Screen"
-         firebaseUtilities.delegate = self
+        firebaseUtilities.delegate = self
         // Do any additional setup after loading the view.
     }
     
     @IBAction func signOutTapped(_ sender: Any) {
+        showActivityIndicator()
         firebaseUtilities.signOut()
     }
     

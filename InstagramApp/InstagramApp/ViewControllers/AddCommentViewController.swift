@@ -10,6 +10,7 @@ import UIKit
 
 extension AddCommentViewController: FirebaseUtilitiesDelegate{
     func dismissPage() {
+        hideActivityIndicator()
         self.dismiss(animated: true, completion: nil)
     }
     func presentAlert(title: String, message: String) {
@@ -41,6 +42,7 @@ class AddCommentViewController: UIViewController {
         }
         if let post = selectedPost {
             if let postId = post.postId {
+                showActivityIndicator()
                 firebaseUtilities.addComment(postId: postId, comment: comment)
             }
         }
@@ -49,6 +51,11 @@ class AddCommentViewController: UIViewController {
     @IBAction func backTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+          self.view.endEditing(true)
+      }
+      
     /*
      // MARK: - Navigation
      

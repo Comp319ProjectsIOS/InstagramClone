@@ -15,6 +15,7 @@ extension LoginViewController: FirebaseUtilitiesDelegate {
         presentAlertHelper(self, title: title, message: message)
     }
     func loginSuccess() {
+        hideActivityIndicator()
         let vc = self.storyboard?.instantiateViewController(identifier: "tabVC")
         self.navigationController?.viewControllers = [vc!]
     }
@@ -31,8 +32,6 @@ class LoginViewController: UIViewController {
         title = "Login"
         firebaseUtilities.delegate = self
         firebaseUtilities.autoLogin()
-        emailText.text = UserDefaults.standard.string(forKey: "email")
-        passwordText.text = UserDefaults.standard.string(forKey: "password")
         
         // Do any additional setup after loading the view.
     }
@@ -40,9 +39,12 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         firebaseUtilities.delegate = self
+        emailText.text = UserDefaults.standard.string(forKey: "email")
+        passwordText.text = UserDefaults.standard.string(forKey: "password")
     }
     
     @IBAction func loginTapped(_ sender: Any) {
+        showActivityIndicator()
         firebaseUtilities.login(email: emailText.text, password: passwordText.text)
     }
     

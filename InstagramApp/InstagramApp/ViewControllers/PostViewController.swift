@@ -28,6 +28,7 @@ extension PostViewController: FirebaseUtilitiesDelegate {
         presentAlertHelper(self, title: title, message: message)
     }
     func dismissPage() {
+        hideActivityIndicator()
         let vc = self.storyboard?.instantiateViewController(identifier: "tabVC")
         self.navigationController?.viewControllers = [vc!]    }
 }
@@ -59,6 +60,7 @@ class PostViewController: UIViewController {
         }
         if let image = image {
             let data = image.jpegData(compressionQuality: 0.5)
+            showActivityIndicator()
             firebaseUtilities.postImage(description: postDescription ,data: data)
         }
     }

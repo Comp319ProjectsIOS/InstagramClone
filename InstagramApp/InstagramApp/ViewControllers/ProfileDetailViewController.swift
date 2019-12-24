@@ -12,9 +12,19 @@ extension ProfileDetailViewController: FirebaseUtilitiesDelegate {
     func postsForProfileFetched(postList: [Post]) {
         postArray = postList
         postsCollectionView.reloadData()
+        hideActivityIndicator()
     }
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
+    }
+    func changeUI() {
+        if (buttonState == 0) {
+            buttonState = 1
+            addFriendButton.setTitle("Remove", for: .normal)
+        } else {
+            buttonState = 0
+            addFriendButton.setTitle("Add Friend", for: .normal)
+        }
     }
 }
 
@@ -30,7 +40,7 @@ extension ProfileDetailViewController: UICollectionViewDataSource {
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! ProfileDetailCollectionViewCell
         let index = indexPath.row
         let post = postArray[index]
-        item.postImageView.downloadImage(from: URL(string: post.urlToPostImage!)!)
+        item.postImageView.kf.setImage(with: URL(string: post.urlToPostImage!))
         return item
     }
     
@@ -42,9 +52,11 @@ class ProfileDetailViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var postsCollectionView: UICollectionView!
+    @IBOutlet weak var addFriendButton: UIButton!
     var selectedUser: User?
     let firebaseUtilities = FirebaseUtilities.getInstance()
     var postArray: [Post] = []
+    var buttonState: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,17 +64,28 @@ class ProfileDetailViewController: UIViewController {
         title = "Profile Detail"
         if let user = selectedUser {
             usernameLabel.text = user.userName
-            profileImageView.downloadImage(from: URL(string: user.imageRef!)!)
+            profileImageView.kf.setImage(with: URL(string: user.imageRef!)!)
         }
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         firebaseUtilities.delegate = self
+        if (buttonState == 0) {
+            addFriendButton.setTitle("Add Friends", for: .normal)
+        } else {
+            addFriendButton.setTitle("Remove", for: .normal)
+        }
     }
     
     @IBAction func addFriendTapped(_ sender: Any) {
-        firebaseUtilities.addFriend(user: selectedUser)
+        showActivityIndicator()
+        if (buttonState == 0) {
+            firebaseUtilities.addFriend(user: selectedUser)
+        } else {
+            firebaseUtilities.deleteFriend(user: selectedUser)
+        }
+        hideActivityIndicator()
     }
     
     

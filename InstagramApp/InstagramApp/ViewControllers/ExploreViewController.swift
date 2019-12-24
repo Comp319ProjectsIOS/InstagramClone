@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 extension ExploreViewController: FirebaseUtilitiesDelegate {
     func postDataFetched(postList: [Post]) {
         self.postArray = postList
         self.exploreTableView.reloadData()
+        hideActivityIndicator()
     }
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
@@ -30,7 +32,8 @@ extension ExploreViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! FeedTableViewCell
         let post = postArray[indexPath.row]
-        cell.postImageView.downloadImage(from: URL(string: post.urlToPostImage!)!)
+        let url = URL(string: post.urlToPostImage!)
+        cell.postImageView.kf.setImage(with: url)
         cell.usernameLabel.text = post.username
         cell.descriptionLabel.text = post.description
         
@@ -49,6 +52,7 @@ class ExploreViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showActivityIndicator()
         firebaseUtilities.fetchUsers()
         title = "Explore"
         // Do any additional setup after loading the view.
@@ -61,6 +65,7 @@ class ExploreViewController: UIViewController {
     }
     
     @IBAction func refreshTapped(_ sender: Any) {
+        showActivityIndicator()
         firebaseUtilities.fetchUsers()
     }
     

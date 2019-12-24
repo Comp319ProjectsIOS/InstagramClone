@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 extension MyProfileViewController: FirebaseUtilitiesDelegate {
     func postsForProfileFetched(postList: [Post]) {
         postArray = postList
         postsCollectionView.reloadData()
+        hideActivityIndicator()
     }
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
@@ -30,7 +32,8 @@ extension MyProfileViewController: UICollectionViewDataSource {
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: "myProfileCell", for: indexPath) as! MyProfileCollectionViewCell
         let index = indexPath.row
         let post = postArray[index]
-        item.postImagaView.downloadImage(from: URL(string: post.urlToPostImage!)!)
+        let url = URL(string: post.urlToPostImage!)
+        item.postImageView.kf.setImage(with: url)
         return item
     }
 }
@@ -61,6 +64,7 @@ class MyProfileViewController: UIViewController {
     
     func getPosts() {
         if let currentId = self.currentUserUid {
+            showActivityIndicator()
             firebaseUtilities.fetchPostsForProfile(uid: currentId)
         }
     }
@@ -75,7 +79,7 @@ class MyProfileViewController: UIViewController {
                     user.userName = username
                 }
                 usernameLabel.text = user.userName
-                profileImageView.downloadImage(from: URL(string: user.imageRef!)!)
+                profileImageView.kf.setImage(with: URL(string: user.imageRef!))
             }
         }
     }

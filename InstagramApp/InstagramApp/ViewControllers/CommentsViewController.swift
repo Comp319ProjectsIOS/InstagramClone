@@ -12,6 +12,7 @@ extension CommentsViewController: FirebaseUtilitiesDelegate{
     func commentsForPostFetched(commentList: [Comment]) {
         commentsArray = commentList
         self.commentsTableView.reloadData()
+        hideActivityIndicator()
     }
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
@@ -60,11 +61,16 @@ class CommentsViewController: UIViewController {
     func getComments() {
         if let post = self.selectedPost {
             if let postId = post.postId {
+                showActivityIndicator()
                 firebaseUtilities.fetchComments(postId: postId)
             }
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+          self.view.endEditing(true)
+      }
+      
     /*
      // MARK: - Navigation
      

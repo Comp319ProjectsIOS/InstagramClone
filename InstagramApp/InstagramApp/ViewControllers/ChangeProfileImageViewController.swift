@@ -28,6 +28,7 @@ extension ChangeProfileImageViewController: FirebaseUtilitiesDelegate {
     }
     func dismissPage() {
         if let firstViewController = self.navigationController?.viewControllers.first {
+            hideActivityIndicator()
             self.navigationController?.popToViewController(firstViewController, animated: true)
         }
     }
@@ -60,10 +61,15 @@ class ChangeProfileImageViewController: UIViewController {
     @IBAction func updateProfileImageTapped(_ sender: Any) {
         if let image = image {
             let data = image.jpegData(compressionQuality: 0.5)
+            showActivityIndicator()
             firebaseUtilities.changeProfileImage(data: data)
         }
         
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+          self.view.endEditing(true)
+      }
+      
     /*
      // MARK: - Navigation
      

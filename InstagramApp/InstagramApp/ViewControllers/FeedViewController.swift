@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 extension FeedViewController: FirebaseUtilitiesDelegate {
     func postDataFetched(postList: [Post]) {
         self.postArray = postList
         self.feedTableView.reloadData()
+        hideActivityIndicator()
     }
     func presentAlert(title: String, message: String) {
         presentAlertHelper(self, title: title, message: message)
@@ -30,7 +32,8 @@ extension FeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! FeedTableViewCell
         let post = postArray[indexPath.row]
-        cell.postImageView.downloadImage(from: URL(string: post.urlToPostImage!)!)
+        let url = URL(string: post.urlToPostImage!)
+        cell.postImageView.kf.setImage(with: url)
         cell.usernameLabel.text = post.username
         cell.descriptionLabel.text = post.description
         
@@ -49,18 +52,20 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        firebaseUtilities.fetchFriends()
         title = "Feed"
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         firebaseUtilities.delegate = self
+        showActivityIndicator()
+        firebaseUtilities.fetchFriends()
         parent?.title = "Feed"
         
     }
     
     @IBAction func refreshTapped(_ sender: Any) {
+        showActivityIndicator()
         firebaseUtilities.fetchFriends()
     }
     

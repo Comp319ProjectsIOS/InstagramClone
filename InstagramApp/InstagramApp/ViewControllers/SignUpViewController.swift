@@ -30,6 +30,7 @@ extension SignUpViewController: FirebaseUtilitiesDelegate {
     }
     func dismissPage() {
         if let firstViewController = self.navigationController?.viewControllers.first {
+            hideActivityIndicator()
             self.navigationController?.popToViewController(firstViewController, animated: true)
         } 
     }
@@ -62,6 +63,7 @@ class SignUpViewController: UIViewController {
         }
         if let image = image {
             let data = image.jpegData(compressionQuality: 0.5)
+            showActivityIndicator()
             firebaseUtilities.signUp(email: email, password: password, data: data, username: username)
         }
         
