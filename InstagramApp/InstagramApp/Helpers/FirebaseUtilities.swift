@@ -447,7 +447,7 @@ class FirebaseUtilities {
                                             self.delegate?.presentAlert(title: "Error", message: error.localizedDescription)
                                             return
                                         }
-                                        self.fetchUsers()
+                                        self.userDict.updateValue(userInfo, forKey: uid)
                                         self.delegate?.dismissPage()
                                     }
                                 }
